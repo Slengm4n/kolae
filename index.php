@@ -118,14 +118,13 @@ $router->group('/api/v1', function ($router) {
 
     // Quadras (Venues)
     $router->get('/venues', [VenueApiController::class, 'getActiveVenuesForMap']);
-    // $router->get('/venues/{id}', [VenueApiController::class, 'getVenueDetails']); // Exemplo futuro
+
 
     // Esportes
     $router->get('/sports', [SportApiController::class, 'getActiveSports']);
 
     // Partidas (Matches) - Requer autenticação
     $router->post('/games', [GameApiController::class, 'createGame']);
-    // $router->get('/matches/venue/{venueId}', [MatchApiController::class, 'getMatches']); // Exemplo futuro
 });
 
 
