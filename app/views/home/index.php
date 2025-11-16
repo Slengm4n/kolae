@@ -85,7 +85,6 @@
 
             <nav class="hidden md:block">
                 <ul class="flex items-center space-x-10">
-                    <li><a href="#encontrar" class="font-semibold hover:text-cyan-400 transition-colors">Encontrar</a></li>
                     <li><a href="#sobre-nos" class="font-semibold hover:text-cyan-400 transition-colors">Sobre Nós</a></li>
                 </ul>
             </nav>
@@ -111,6 +110,7 @@
         <!-- ==================== SEÇÃO HERO (VÍDEO) ==================== -->
         <section class="relative h-screen flex items-center justify-center text-center md:justify-start md:text-left p-0">
             <iframe
+                title=" Vídeo de fundo com atletas praticando esportes"
                 src="https://player.vimeo.com/video/1129399439?background=1&autoplay=1&loop=1&muted=1&autopause=0"
                 class="vimeo-bg-cover"
                 frameborder="0"
@@ -232,7 +232,7 @@
                 <h4 class="text-lg font-semibold mb-4">Receba nossas novidades</h4>
                 <p class="text-sm text-gray-400">Cadastre-se para ficar por dentro dos próximos eventos e atualizações.</p>
                 <form class="flex mt-4">
-                    <input type="email" placeholder="Seu melhor e-mail" required class="w-full bg-gray-900 border border-gray-700 rounded-l-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-400">
+                    <input type="email" class="sr-only" placeholder="Seu melhor e-mail" required class="w-full bg-gray-900 border border-gray-700 rounded-l-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-400">
                     <button type="submit" aria-label="Enviar email" class="bg-cyan-400 text-black font-bold px-4 py-2 rounded-r-md hover:bg-cyan-300 transition-colors"><i class="fas fa-paper-plane"></i></button>
                 </form>
             </div>

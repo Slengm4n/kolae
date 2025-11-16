@@ -53,7 +53,7 @@
         <div class="hidden lg:flex w-1/2 bg-cover bg-center relative items-center justify-center" style="background-image: url('https://images.pexels.com/photos/3768916/pexels-photo-3768916.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
             <div class="absolute inset-0 bg-black/60"></div>
             <div class="relative z-10 text-center px-12 animate-fadeInUp">
-                <img src="./assets/img/kolae_branca.png" alt="Logo Kolae" class="h-16 mx-auto mb-6">
+                <img src="<?php echo BASE_URL; ?>/assets/img/kolae_branca.png" alt="Logo Kolae" class="h-16 mx-auto mb-6">
                 <h1 class="text-4xl font-bold leading-tight">Vamos te colocar de volta no jogo.</h1>
                 <p class="mt-4 text-lg text-gray-300">Recupere seu acesso e não perca nenhuma oportunidade de se conectar.</p>
             </div>
@@ -62,7 +62,7 @@
         <div class="w-full lg:w-1/2 flex items-center justify-center p-4 sm:p-8">
             <div class="w-full max-w-md bg-[#161B22] p-8 rounded-2xl border border-gray-800 lg:border-none lg:bg-transparent lg:p-0 animate-fadeInUp" style="animation-delay: 200ms;">
                 <a href="index.html" class="lg:hidden mb-6 inline-block w-full text-center">
-                    <img src="./assets/img/kolae_branca.png" alt="Logo Kolae" class="h-10 mx-auto">
+                    <img src="<?php echo BASE_URL; ?>/assets/img/kolae_branca.png" alt="Logo Kolae" class="h-10 mx-auto">
                 </a>
 
                 <h2 class="text-3xl font-bold text-center mb-2">Esqueceu sua senha?</h2>

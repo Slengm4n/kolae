@@ -1,6 +1,8 @@
 <?php
 // Define o título da página
-$pageTitle = "Crie uma Nova Senha - Kolae";
+$pageTitle = "Kolae";
+
+$token = $data['token'] ?? '';
 
 // Lógica para exibir mensagens de erro
 $errorMessage = null;
@@ -87,7 +89,7 @@ if (isset($_GET['error'])) {
             <h2 class="text-3xl font-bold text-center mb-8">Crie sua Nova Senha</h2>
 
             <!-- Action aponta para a rota POST de reset -->
-            <form action="<?= BASE_URL ?>/reset-password" method="POST" class="space-y-6">
+            <form id="reset-form" action="<?= BASE_URL ?>/reset-password" method="POST" class="space-y-6">
 
                 <!-- Campo Oculto com o Token -->
                 <input type="hidden" name="token" value="<?= htmlspecialchars($token) ?>">
@@ -102,13 +104,12 @@ if (isset($_GET['error'])) {
                 <div>
                     <label for="password_confirmation" class="block text-sm font-medium text-gray-300">Confirme a Nova Senha</label>
                     <div class="mt-1">
-                        <!-- Correção do bug 'password_confirm' para 'password_confirmation' -->
                         <input id="password_confirmation" name="password_confirmation" type="password" required class="w-full bg-gray-800 border border-gray-700 rounded-md px-4 py-3 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-400">
                     </div>
                 </div>
 
                 <div>
-                    <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-bold text-black bg-cyan-400 hover:bg-cyan-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-cyan-400 transition-colors">
+                    <button id='reset-button' type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-bold text-black bg-cyan-400 hover:bg-cyan-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-cyan-400 transition-colors">
                         Salvar Nova Senha
                     </button>
                 </div>
@@ -120,7 +121,20 @@ if (isset($_GET['error'])) {
             </p>
         </div>
     </div>
-    <!-- Fim do Layout Centralizado -->
+    <script>
+        const resetForm = document.getElementById('reset-form');
+        const resetButton = document.getElementById('reset-button');
+
+        if (resetForm && resetButton) {
+            resetForm.addEventListener('submit', function() {
+                resetButton.disabled = true;
+                resetButton.innerHTML = `
+                    <i class="fas fa-spinner fa-spin mr-2"></i>
+                    Aguarde...
+                `;
+            });
+        }
+    </script>
 
 </body>
 

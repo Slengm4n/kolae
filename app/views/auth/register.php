@@ -63,7 +63,7 @@
             <div class="relative w-full max-w-md bg-[#161B22] p-8 rounded-2xl border border-gray-800 lg:border-none lg:bg-transparent lg:p-0 animate-fadeInUp" style="animation-delay: 200ms;">
 
                 <!-- Botão de Voltar para Home -->
-                <a href="<?php echo BASE_URL; ?>/" class="absolute top-4 left-4 lg:top-0 lg:left-0 text-gray-400 hover:text-white transition-colors" title="Voltar para a Home">
+                <a href="<?php echo BASE_URL; ?>/" ... title="Voltar para a Home" aria-label="Voltar para a página inicial">
                     <i class="fas fa-arrow-left text-xl"></i>
                 </a>
 

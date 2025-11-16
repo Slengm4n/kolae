@@ -113,9 +113,11 @@ class Venue
     {
         $pdo = Database::getConnection();
         $query = "SELECT v.id, v.name, a.street, a.number, a.city, a.latitude, a.longitude,
+                         u.name as owner_name,
                          (SELECT vi.file_path FROM venue_images vi WHERE vi.venue_id = v.id ORDER BY vi.id DESC LIMIT 1) as image_path
                   FROM venues v
-                  JOIN addresses a ON v.address_id = a.id";
+                  JOIN addresses a ON v.address_id = a.id
+                  LEFT JOIN users u ON v.user_id = u.id WHERE v.status = 'available'";
         $stmt = $pdo->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
