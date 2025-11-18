@@ -29,30 +29,37 @@ class AuthController
             $user = User::findByEmail($email);
 
             if ($user && password_verify($password, $user['password_hash'])) {
+                // 1. Inicia a sessão e armazena os dados (Padrão)
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_name'] = $user['name'];
                 $_SESSION['user_role'] = $user['role'];
                 $_SESSION['user_avatar'] = $user['avatar_path'];
 
+                // ============================================================
+                // --- NOVO: LÓGICA DO REMEMBER ME ---
+                // ============================================================
+
+                // Verifica se o checkbox foi marcado no formulário HTML (name="remember-me")
                 if (isset($_POST['remember-me'])) {
 
+                    // A. Gera tokens criptograficamente seguros
                     $selector = bin2hex(random_bytes(16));
                     $validator = bin2hex(random_bytes(32));
 
-                    //Define validade (30 dias a partir de agora)
+                    // B. Define validade (30 dias a partir de agora)
                     $expiry = date('Y-m-d H:i:s', time() + (30 * 24 * 60 * 60));
 
-                    //Hash do validador para salvar no banco (segurança caso vazem o banco)
+                    // C. Hash do validador para salvar no banco (segurança)
                     $hashedValidator = hash('sha256', $validator);
 
-                    //Salva na tabela user_tokens
+                    // D. Salva na tabela user_tokens
                     try {
                         $conn = \App\Core\Database::getConnection();
                         $sql = "INSERT INTO user_tokens (user_id, selector, hashed_validator, expiry) VALUES (?, ?, ?, ?)";
                         $stmt = $conn->prepare($sql);
                         $stmt->execute([$user['id'], $selector, $hashedValidator, $expiry]);
 
-                        // Cria o Cookie no navegador do usuário
+                        // E. Cria o Cookie no navegador do usuário
                         // O valor é "selector:validator"
                         setcookie(
                             'remember_me',              // Nome do cookie
@@ -60,14 +67,17 @@ class AuthController
                             time() + (30 * 24 * 60 * 60), // Expira em 30 dias
                             '/',                        // Disponível em todo o site
                             '',                         // Domínio (vazio = atual)
-                            false,                      // Secure (Mude para true se usar HTTPS/SSL)
-                            true                        // HttpOnly (JavaScript não acessa, evita XSS)
+                            false,                      // Secure (Mude para true se usar HTTPS em produção)
+                            true                        // HttpOnly (JavaScript não acessa)
                         );
                     } catch (\Exception $e) {
-                        // Se der erro no token, não barra o login, apenas loga o erro silenciosamente
+                        // Se der erro no token, apenas loga e segue o login normal
                         error_log("Erro ao criar token remember me: " . $e->getMessage());
                     }
                 }
+                // ============================================================
+                // --- FIM DO NOVO BLOCO ---
+                // ============================================================
 
                 // Redireciona com base na role
                 $redirect_to = ($user['role'] === 'admin') ? '/admin' : '/dashboard';
@@ -91,6 +101,8 @@ class AuthController
     public function store()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // --- VALIDAÇÃO ---
+            // IMPORTANTE: Verifique se o nome do campo no HTML é 'password_confirmation'
             if ($_POST['password'] !== $_POST['password_confirmation']) {
                 header('Location: ' . BASE_URL . '/register?error=password_mismatch');
                 exit;
@@ -109,10 +121,9 @@ class AuthController
                 'email' => $_POST['email'],
                 'birthdate' => $_POST['birthdate'],
                 'password_hash' => password_hash($_POST['password'], PASSWORD_DEFAULT),
-                'role' => 'user'
+                'role' => 'user' // Define a role padrão
             ];
 
-            // Passe o array único para o método create
             if (User::create($userData)) {
                 header('Location: ' . BASE_URL . '/login?status=registered');
                 exit;
@@ -147,7 +158,7 @@ class AuthController
             exit;
         }
 
-        $user = User::findByEmail($email); // o usuário precisa estar 'active'
+        $user = User::findByEmail($email); 
 
         if ($user) {
             try {
@@ -170,11 +181,9 @@ class AuthController
                 $mail->Port       = SMTP_PORT;
                 $mail->CharSet    = 'UTF-8';
 
-                // Destinatários
                 $mail->setFrom(SMTP_FROM_EMAIL, SMTP_FROM_NAME);
                 $mail->addAddress($email, $user['name']);
 
-                // Conteúdo
                 $mail->isHTML(true);
                 $mail->Subject = 'Recuperação de Senha - Kolae';
                 $reset_link = BASE_URL . '/reset-password?token=' . $token;
@@ -192,7 +201,7 @@ class AuthController
             }
         }
 
-        // Resposta de segurança: SEMPRE mostre sucesso,
+        // Resposta de segurança: SEMPRE mostre sucesso
         header('Location: ' . BASE_URL . '/forgot-password?status=sent');
         exit;
     }
@@ -201,17 +210,13 @@ class AuthController
     {
         $token = $_GET['token'] ?? '';
 
-        // Verifica se o token é válido e não expirou
         $resetRequest = PasswordReset::findValidToken($token);
 
         if (!$resetRequest) {
-            // Token inválido ou expirado
             header('Location: ' . BASE_URL . '/login?error=invalid_token');
             exit;
         }
 
-        // Token é válido, mostre o formulário de reset
-        // Passamos o token para a view para incluí-lo em um campo oculto
         ViewHelper::render('auth/reset-password', ['token' => $token]);
     }
 
@@ -250,11 +255,9 @@ class AuthController
             // 4. Sucesso! Invalidar o token
             PasswordReset::deleteTokensForEmail($email);
 
-            // 5. Redirecionar para o login com mensagem de sucesso
             header('Location: ' . BASE_URL . '/login?status=password_reset');
             exit;
         } else {
-            // Erro ao atualizar
             header('Location: ' . BASE_URL . '/reset-password?token=' . $token . '&error=generic');
             exit;
         }
@@ -265,27 +268,27 @@ class AuthController
     {
         // 1. Apagar do banco (se tiver cookie e ele for válido)
         if (isset($_COOKIE['remember_me'])) {
-            // Separa com segurança para evitar erro se o cookie estiver malformado
+            // Separa com segurança
             $parts = explode(':', $_COOKIE['remember_me']);
-
+            
             if (count($parts) === 2) {
-                list($selector,) = $parts;
-
+                list($selector, ) = $parts;
+                
                 try {
-
+                    // Usa o caminho completo (Namespace) para evitar erro de classe não encontrada
                     $conn = \App\Core\Database::getConnection();
                     $sql = "DELETE FROM user_tokens WHERE selector = ?";
                     $stmt = $conn->prepare($sql);
                     $stmt->execute([$selector]);
                 } catch (\Exception $e) {
-                    // Se der erro no banco, segue o logout normalmente (não trava o usuário)
+                    // Se der erro no banco, segue o logout normalmente
                     error_log("Erro ao limpar token de logout: " . $e->getMessage());
                 }
             }
 
-            // 2. Matar o cookie
+            // 2. Matar o cookie (seta data no passado e valor vazio)
             setcookie('remember_me', '', time() - 3600, '/');
-
+            
             // Remove do array global para garantir que o script atual não o veja mais
             unset($_COOKIE['remember_me']);
         }
@@ -294,16 +297,12 @@ class AuthController
         // Limpa todas as variáveis de sessão
         $_SESSION = [];
 
+        // Se quiser destruir o cookie da sessão também (recomendado para limpeza total)
         if (ini_get("session.use_cookies")) {
             $params = session_get_cookie_params();
-            setcookie(
-                session_name(),
-                '',
-                time() - 42000,
-                $params["path"],
-                $params["domain"],
-                $params["secure"],
-                $params["httponly"]
+            setcookie(session_name(), '', time() - 42000,
+                $params["path"], $params["domain"],
+                $params["secure"], $params["httponly"]
             );
         }
 
