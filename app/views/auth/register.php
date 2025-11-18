@@ -169,17 +169,18 @@ if (isset($_GET['error'])) {
                         </div>
                     </div>
 
-                    <div>
-                        <label for="confirm_password" class="block text-sm font-medium text-gray-300 ml-1">Confirmar Senha</label>
+                                        <div>
+                        <label for="password_confirmation" class="block text-sm font-medium text-gray-300 ml-1">Confirmar Senha</label>
                         <div class="mt-1 relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <i class="fas fa-key text-gray-500"></i>
                             </div>
-                            <input id="confirm_password" name="confirm_password" type="password" autocomplete="new-password" required
+                            <input id="password_confirmation" name="password_confirmation" type="password" autocomplete="new-password" required
                                 class="w-full bg-gray-900/50 border border-gray-600 rounded-lg pl-10 pr-4 py-3 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all"
                                 placeholder="Repita a senha">
                         </div>
                     </div>
+
 
                     <div class="flex items-start pt-2">
                         <div class="flex items-center h-5">
