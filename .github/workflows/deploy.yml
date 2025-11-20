@@ -39,6 +39,7 @@ jobs:
                   # --- CORREÇÃO AQUI ---
                   server-dir: ./htdocs/
                   # ---------------------
+                  protocol: ftp
 
                   exclude: |
                       **/.git*
