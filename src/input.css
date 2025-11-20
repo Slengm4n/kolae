@@ -1,0 +1,37 @@
+@import 'tailwindcss';
+
+/* 1. DEFINIÇÃO DAS VARIÁVEIS (A Lógica) */
+@layer base {
+    :root {
+        /* Cores do Light Mode */
+        --color-surface-base: #ffffff;
+        --color-surface-secondary: #f3f4f6;
+        --color-surface-elevated: #e5e7eb;
+        --color-content-primary: #111827;
+        --color-content-secondary: #4b5563;
+        --color-border-default: #e5e7eb;
+    }
+
+    /* Cores do Dark Mode (quando a classe .dark está no HTML) */
+    :root.dark {
+        --color-surface-base: #0d1117;
+        --color-surface-elevated: #21262d;
+        --color-surface-secondary: #161b22;
+        --color-content-primary: #ffffff;
+        --color-content-secondary: #99a1af;
+        --color-border-default: #30363d;
+    }
+}
+
+/* 2. REGISTRO DO TEMA (A Mágica) */
+/* Isso diz ao Tailwind: "Crie classes bg-*, text-* usando essas variáveis" */
+@theme {
+    --color-surface-base: var(--color-surface-base);
+    --color-surface-secondary: var(--color-surface-secondary);
+    --color-surface-elevated: var(--color-surface-elevated);
+
+    --color-content-primary: var(--color-content-primary);
+    --color-content-secondary: var(--color-content-secondary);
+
+    --color-border-default: var(--color-border-default);
+}

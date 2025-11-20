@@ -54,7 +54,7 @@
     </style>
 </head>
 
-<body class="bg-gray-900 text-white">
+<body class="bg-[#161B22] text-white">
 
     <div class="flex min-h-screen relative">
 

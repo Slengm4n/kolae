@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="transition-colors duration-500">
 
 <head>
     <meta charset="UTF-8">
@@ -17,10 +17,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-    <link href="<?php echo BASE_URL; ?>/assets/css/style.css?v=" rel="stylesheet">
+    <link href="<?php echo BASE_URL; ?>/assets/css/output.css" rel="stylesheet">
 
     <style>
-        /* Estilos Críticos */
+        /* Estilos Críticos e Animações Personalizadas */
         html {
             overflow-x: hidden;
             scroll-behavior: smooth;
@@ -30,8 +30,6 @@
             font-family: 'Poppins', sans-serif;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
-            /* Removi a animação de fade inicial pois ela pode estar ocultando o LCP para o Lighthouse */
-            /* animation: pageFadeIn 0.4s ease-out both; */
         }
 
         @keyframes scroll {
@@ -72,30 +70,35 @@
     </style>
 </head>
 
-<body class="bg-[#0D1117] text-white">
+<body class="bg-surface-base text-content-primary transition-colors duration-500">
 
     <?php
     $isLoggedIn = isset($_SESSION['user_id']);
     $userName = $_SESSION['user_name'] ?? 'Usuário';
     ?>
 
+    <button id="theme-toggle" class="fixed top-24 right-4 z-50 p-3 rounded-full bg-surface-elevated text-content-primary shadow-lg border border-gray-700/20 hover:scale-110 transition-transform cursor-pointer">
+        <i class="fas fa-sun hidden dark:block text-yellow-400"></i>
+        <i class="fas fa-moon block dark:hidden text-blue-600"></i>
+    </button>
+
     <header class="absolute top-0 left-0 w-full z-30 py-6">
         <div class="container mx-auto px-4 flex justify-between items-center">
 
-            <img src="<?php echo BASE_URL; ?>/assets/img/kolae_branca.png" alt="Logo Kolae" class="h-10">
+            <img src="<?php echo BASE_URL; ?>/assets/img/kolae_branca.png" alt="Logo Kolae" class="h-10 drop-shadow-md">
 
             <nav class="hidden md:block">
                 <ul class="flex items-center space-x-10">
-                    <li><a href="#sobre-nos" class="font-semibold hover:text-cyan-400 transition-colors">Sobre Nós</a></li>
+                    <li><a href="#sobre-nos" class="font-semibold text-white hover:text-cyan-400 transition-colors drop-shadow-md">Sobre Nós</a></li>
 
                     <?php if ($isLoggedIn): ?>
-                        <li><a href="<?php echo BASE_URL; ?>/dashboard" class="font-bold text-cyan-400 hover:text-cyan-300 transition-colors border border-cyan-400 px-4 py-2 rounded-full">Meu Painel</a></li>
+                        <li><a href="<?php echo BASE_URL; ?>/dashboard" class="font-bold text-cyan-400 hover:text-cyan-300 transition-colors border border-cyan-400 px-4 py-2 rounded-full backdrop-blur-sm">Meu Painel</a></li>
                     <?php endif; ?>
                 </ul>
             </nav>
 
             <div class="relative">
-                <div id="user-menu-button" class="flex items-center gap-4 p-2 border border-gray-700 rounded-full cursor-pointer transition-colors hover:bg-gray-800 bg-[#0D1117]/80 backdrop-blur-sm">
+                <div id="user-menu-button" class="flex items-center gap-4 p-2 border border-gray-700/50 rounded-full cursor-pointer transition-colors hover:bg-surface-secondary bg-surface-elevated/80 backdrop-blur-sm text-content-primary">
                     <i class="fas fa-bars text-lg ml-2"></i>
 
                     <?php if ($isLoggedIn): ?>
@@ -114,29 +117,29 @@
                             </div>
                         <?php endif; ?>
                     <?php else: ?>
-                        <i class="fas fa-user-circle text-3xl text-gray-400"></i>
+                        <i class="fas fa-user-circle text-3xl text-content-secondary"></i>
                     <?php endif; ?>
                 </div>
 
-                <div id="profile-dropdown" class="absolute top-full right-0 mt-4 w-72 bg-[#1c2128] border border-gray-700 rounded-xl shadow-2xl opacity-0 invisible transform -translate-y-2 transition-all duration-300 z-50">
-                    <ul class="py-2">
+                <div id="profile-dropdown" class="absolute top-full right-0 mt-4 w-72 bg-surface-elevated border border-gray-700/50 rounded-xl shadow-2xl opacity-0 invisible transform -translate-y-2 transition-all duration-300 z-50">
+                    <ul class="py-2 text-content-primary">
 
-                        <li class="md:hidden"><a href="#sobre-nos" class="flex items-center gap-4 px-5 py-3 text-sm hover:bg-gray-800 transition-colors"><i class="fas fa-info-circle w-5 text-center text-gray-400"></i> Sobre Nós</a></li>
+                        <li class="md:hidden"><a href="#sobre-nos" class="flex items-center gap-4 px-5 py-3 text-sm hover:bg-surface-secondary transition-colors"><i class="fas fa-info-circle w-5 text-center text-content-secondary"></i> Sobre Nós</a></li>
 
-                        <li class="border-t border-gray-700 my-2 md:hidden"></li>
+                        <li class="border-t border-gray-700/50 my-2 md:hidden"></li>
 
                         <?php if ($isLoggedIn): ?>
                             <li>
-                                <div class="px-5 py-2 text-xs text-gray-500 uppercase font-bold">Conta</div>
+                                <div class="px-5 py-2 text-xs text-content-secondary uppercase font-bold">Conta</div>
                             </li>
-                            <li><a href="<?php echo BASE_URL; ?>/dashboard" class="flex items-center gap-4 px-5 py-3 text-sm hover:bg-gray-800 transition-colors"><i class="fas fa-columns w-5 text-center text-cyan-400"></i> Meu Painel</a></li>
-                            <li><a href="<?php echo BASE_URL; ?>/dashboard/perfil" class="flex items-center gap-4 px-5 py-3 text-sm hover:bg-gray-800 transition-colors"><i class="fas fa-user-cog w-5 text-center text-gray-400"></i> Perfil</a></li>
-                            <li class="border-t border-gray-700 my-2"></li>
-                            <li><a href="<?php echo BASE_URL; ?>/logout" class="flex items-center gap-4 px-5 py-3 text-sm text-red-400 hover:bg-gray-800 transition-colors"><i class="fas fa-sign-out-alt w-5 text-center"></i> Sair</a></li>
+                            <li><a href="<?php echo BASE_URL; ?>/dashboard" class="flex items-center gap-4 px-5 py-3 text-sm hover:bg-surface-secondary transition-colors"><i class="fas fa-columns w-5 text-center text-cyan-400"></i> Meu Painel</a></li>
+                            <li><a href="<?php echo BASE_URL; ?>/dashboard/perfil" class="flex items-center gap-4 px-5 py-3 text-sm hover:bg-surface-secondary transition-colors"><i class="fas fa-user-cog w-5 text-center text-content-secondary"></i> Perfil</a></li>
+                            <li class="border-t border-gray-700/50 my-2"></li>
+                            <li><a href="<?php echo BASE_URL; ?>/logout" class="flex items-center gap-4 px-5 py-3 text-sm text-red-400 hover:bg-surface-secondary transition-colors"><i class="fas fa-sign-out-alt w-5 text-center"></i> Sair</a></li>
 
                         <?php else: ?>
-                            <li><a href="<?php echo BASE_URL; ?>/login" class="flex items-center gap-4 px-5 py-3 text-sm hover:bg-gray-800 transition-colors"><i class="fas fa-sign-in-alt w-5 text-center text-gray-400"></i> Entrar</a></li>
-                            <li><a href="<?php echo BASE_URL; ?>/register" class="flex items-center gap-4 px-5 py-3 text-sm font-bold text-cyan-400 hover:bg-gray-800 transition-colors"><i class="fas fa-user-plus w-5 text-center"></i> Cadastre-se</a></li>
+                            <li><a href="<?php echo BASE_URL; ?>/login" class="flex items-center gap-4 px-5 py-3 text-sm hover:bg-surface-secondary transition-colors"><i class="fas fa-sign-in-alt w-5 text-center text-content-secondary"></i> Entrar</a></li>
+                            <li><a href="<?php echo BASE_URL; ?>/register" class="flex items-center gap-4 px-5 py-3 text-sm font-bold text-cyan-400 hover:bg-surface-secondary transition-colors"><i class="fas fa-user-plus w-5 text-center"></i> Cadastre-se</a></li>
                         <?php endif; ?>
 
                     </ul>
@@ -148,21 +151,14 @@
     <main>
         <section class="relative h-screen flex items-center justify-center text-center md:justify-start md:text-left p-0 overflow-hidden">
 
-            <video
-                autoplay
-                muted
-                loop
-                playsinline
-                class="vimeo-bg-cover">
-
+            <video autoplay muted loop playsinline class="vimeo-bg-cover">
                 <source src="<?php echo BASE_URL; ?>/assets/img/hero-bg.mp4" type="video/mp4">
-
                 Seu navegador não suporta vídeos HTML5.
             </video>
 
             <div class="absolute top-0 left-0 w-full h-full bg-black/60 z-[-1]"></div>
 
-            <div class="container mx-auto px-4 relative z-10">
+            <div class="container mx-auto px-4 relative z-10 text-white">
                 <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold max-w-lg leading-tight mx-auto md:mx-0">Cole com quem ama esporte</h1>
                 <div class="flex flex-wrap gap-4 mt-8 justify-center md:justify-start">
                     <a href="<?php echo BASE_URL; ?>/login" class="py-3 px-8 rounded-full font-semibold transition-all duration-300 bg-white text-black border-2 border-white hover:bg-transparent hover:text-white">Comece de graça</a>
@@ -170,31 +166,31 @@
             </div>
         </section>
 
-        <section class="bg-[#161B22] py-16 md:py-24 overflow-hidden">
+        <section class="bg-surface-secondary py-16 md:py-24 overflow-hidden transition-colors duration-500">
             <div class="container mx-auto px-4 text-center">
-                <h2 class="text-3xl md:text-4xl font-bold max-w-2xl mx-auto">Conecte-se com quem compartilha a sua paixão pelo esporte.</h2>
-                <p class="max-w-3xl mx-auto mt-4 text-gray-400">Encontre atletas com os mesmos interesses, nível de habilidade e na sua região. Mais do que uma conexão, é o seu novo time.</p>
+                <h2 class="text-3xl md:text-4xl font-bold max-w-2xl mx-auto text-content-primary">Conecte-se com quem compartilha a sua paixão pelo esporte.</h2>
+                <p class="max-w-3xl mx-auto mt-4 text-content-secondary">Encontre atletas com os mesmos interesses, nível de habilidade e na sua região. Mais do que uma conexão, é o seu novo time.</p>
             </div>
             <div class="container mx-auto px-4 mt-12 md:mt-16 pb-10">
                 <div class="swiper intro-carousel h-[480px]">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide h-[450px] rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105 hover:-translate-y-1">
-                            <img src="https://images.pexels.com/photos/47730/the-ball-stadion-football-the-pitch-47730.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Bola de futebol no gramado do estádio" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                            <img src="https://images.pexels.com/photos/47730/the-ball-stadion-football-the-pitch-47730.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Bola de futebol" class="w-full h-full object-cover" loading="lazy">
                         </div>
                         <div class="swiper-slide h-[450px] rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105 hover:-translate-y-1">
-                            <img src="https://images.pexels.com/photos/270085/pexels-photo-270085.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Mulher correndo em trilha" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                            <img src="https://images.pexels.com/photos/270085/pexels-photo-270085.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Mulher correndo" class="w-full h-full object-cover" loading="lazy">
                         </div>
                         <div class="swiper-slide h-[450px] rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105 hover:-translate-y-1">
-                            <img src="https://images.pexels.com/photos/163452/basketball-dunk-blue-game-163452.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Homem fazendo uma enterrada no basquete" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                            <img src="https://images.pexels.com/photos/163452/basketball-dunk-blue-game-163452.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Basquete" class="w-full h-full object-cover" loading="lazy">
                         </div>
                         <div class="swiper-slide h-[450px] rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105 hover:-translate-y-1">
-                            <img src="https://images.pexels.com/photos/1263349/pexels-photo-1263349.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Pessoa surfando uma onda" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                            <img src="https://images.pexels.com/photos/1263349/pexels-photo-1263349.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Surf" class="w-full h-full object-cover" loading="lazy">
                         </div>
                         <div class="swiper-slide h-[450px] rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105 hover:-translate-y-1">
-                            <img src="https://images.pexels.com/photos/863988/pexels-photo-863988.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Pessoa nadando em uma piscina" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                            <img src="https://images.pexels.com/photos/863988/pexels-photo-863988.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Natação" class="w-full h-full object-cover" loading="lazy">
                         </div>
                         <div class="swiper-slide h-[450px] rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105 hover:-translate-y-1">
-                            <img src="https://images.pexels.com/photos/1080884/pexels-photo-1080884.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Jogadores de vôlei em ação" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                            <img src="https://images.pexels.com/photos/1080884/pexels-photo-1080884.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Vôlei" class="w-full h-full object-cover" loading="lazy">
                         </div>
                     </div>
                     <div class="swiper-pagination"></div>
@@ -202,35 +198,36 @@
             </div>
         </section>
 
-        <section id="sobre-nos" class="py-16 md:py-24">
+        <section id="sobre-nos" class="py-16 md:py-24 bg-surface-base text-content-primary transition-colors duration-500">
             <div class="container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
                 <div class="order-last lg:order-first">
-                    <img src="./assets/img/about_us_img.png" alt="Atletas celebrando juntos" class="w-full rounded-xl" loading="lazy" decoding="async">
+                    <img src="./assets/img/about_us_img.png" alt="Atletas celebrando juntos" class="w-full rounded-xl shadow-lg" loading="lazy">
                 </div>
                 <div class="text-center lg:text-left">
                     <h2 class="text-3xl md:text-4xl font-bold">Nossa Missão é Conectar Atletas</h2>
-                    <p class="mt-4 text-gray-400">Acreditamos que o esporte tem o poder de unir pessoas, criar comunidades e transformar vidas. A Kolae nasceu do desejo de facilitar essa conexão, oferecendo uma plataforma onde atletas de todos os níveis podem encontrar parceiros de treino, equipes e eventos na sua região.</p>
+                    <p class="mt-4 text-content-secondary">Acreditamos que o esporte tem o poder de unir pessoas, criar comunidades e transformar vidas. A Kolae nasceu do desejo de facilitar essa conexão, oferecendo uma plataforma onde atletas de todos os níveis podem encontrar parceiros de treino, equipes e eventos na sua região.</p>
                     <div class="mt-8 flex flex-col sm:flex-row gap-8 justify-center lg:justify-start">
                         <div>
                             <i class="fas fa-users text-cyan-400 text-3xl mb-3"></i>
                             <h3 class="text-lg font-bold">Comunidade</h3>
-                            <p class="text-sm text-gray-400">Construa seu time e faça parte de uma rede de atletas apaixonados.</p>
+                            <p class="text-sm text-content-secondary">Construa seu time e faça parte de uma rede de atletas apaixonados.</p>
                         </div>
                         <div>
                             <i class="fas fa-map-marker-alt text-cyan-400 text-3xl mb-3"></i>
                             <h3 class="text-lg font-bold">Conexão Local</h3>
-                            <p class="text-sm text-gray-400">Encontre treinos e jogos perto de você, a qualquer hora.</p>
+                            <p class="text-sm text-content-secondary">Encontre treinos e jogos perto de você, a qualquer hora.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="bg-[#161B22] py-16 md:py-24">
+        <section class="bg-surface-secondary py-16 md:py-24 transition-colors duration-500">
             <div class="container mx-auto px-4 text-center">
-                <h2 class="text-3xl md:text-4xl font-bold">Parceiros que fortalecem o esporte</h2>
-                <p class="max-w-3xl mx-auto mt-4 text-gray-400">Conheça as marcas que apoiam o crescimento do esporte e da nossa comunidade.</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-content-primary">Parceiros que fortalecem o esporte</h2>
+                <p class="max-w-3xl mx-auto mt-4 text-content-secondary">Conheça as marcas que apoiam o crescimento do esporte e da nossa comunidade.</p>
             </div>
+
             <div class="w-full overflow-hidden relative mt-16 [mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)]">
                 <div class="flex animate-scroll hover:[animation-play-state:paused]">
                     <div class="w-52 flex-shrink-0 flex items-center justify-center mx-4"><img src="<?php echo BASE_URL; ?>/assets/img/logo_fatec.png" alt="Logo Fatec" class="h-12 transition-all duration-300 filter grayscale brightness-75 opacity-70 hover:filter-none hover:opacity-100" loading="lazy"></div>
@@ -250,42 +247,85 @@
         </section>
     </main>
 
-    <footer class="bg-gray-800 pt-16 md:pt-20 border-t border-gray-700">
+    <footer class="bg-surface-elevated pt-16 md:pt-20 border-t border-gray-700/30 transition-colors duration-500">
         <div class="container mx-auto px-4 grid md:grid-cols-2 lg:grid-cols-3 gap-12">
             <div class="mb-8 text-center md:text-left">
                 <img src="<?php echo BASE_URL; ?>/assets/img/kolae_branca.png" alt="Logo Kolae" class="h-10 mx-auto md:mx-0" loading="lazy">
-                <p class="text-sm text-gray-400 mt-4">Conectando atletas, fortalecendo o esporte.</p>
-                <div class="flex space-x-4 mt-6 justify-center md:justify-start">
+                <p class="text-sm text-content-secondary mt-4">Conectando atletas, fortalecendo o esporte.</p>
+                <div class="flex space-x-4 mt-6 justify-center md:justify-start text-content-primary">
                     <a href="#" class="text-xl hover:text-cyan-400 transition-colors" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                     <a href="#" class="text-xl hover:text-cyan-400 transition-colors" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                     <a href="#" class="text-xl hover:text-cyan-400 transition-colors" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                 </div>
             </div>
             <div class="mb-8 text-center md:text-left">
-                <h3 class="text-lg font-semibold mb-4">Contato</h3>
-                <p class="text-sm text-gray-400"><a href="mailto:kolae.gg@gmail.com" class="hover:text-cyan-400 transition-colors">kolae.gg@gmail.com</a></p>
-                <p class="text-sm text-gray-400 mt-2">+55 (11) 99860-0253</p>
+                <h3 class="text-lg font-semibold mb-4 text-content-primary">Contato</h3>
+                <p class="text-sm text-content-secondary"><a href="mailto:kolae.gg@gmail.com" class="hover:text-cyan-400 transition-colors">kolae.gg@gmail.com</a></p>
+                <p class="text-sm text-content-secondary mt-2">+55 (11) 99860-0253</p>
             </div>
             <div class="mb-8 text-center md:text-left">
-                <h3 class="text-lg font-semibold mb-4">Receba nossas novidades</h3>
-                <p class="text-sm text-gray-400">Cadastre-se para ficar por dentro dos próximos eventos e atualizações.</p>
+                <h3 class="text-lg font-semibold mb-4 text-content-primary">Receba nossas novidades</h3>
+                <p class="text-sm text-content-secondary">Cadastre-se para ficar por dentro dos próximos eventos e atualizações.</p>
                 <form class="flex mt-4">
-                    <input type="email" class="sr-only" placeholder="Seu melhor e-mail" required class="w-full bg-gray-900 border border-gray-700 rounded-l-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-400">
+                    <input type="email" class="sr-only" placeholder="Seu melhor e-mail" required class="w-full bg-surface-base text-content-primary border border-gray-700 rounded-l-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-400">
                     <button type="submit" aria-label="Enviar email" class="bg-cyan-400 text-black font-bold px-4 py-2 rounded-r-md hover:bg-cyan-300 transition-colors"><i class="fas fa-paper-plane"></i></button>
                 </form>
             </div>
         </div>
-        <div class="mt-8 md:mt-12 py-6 border-t border-gray-700 text-center">
-            <p class="text-sm text-gray-400">&copy; 2025 Kolae. Todos os direitos reservados.</p>
+        <div class="mt-8 md:mt-12 py-6 border-t border-gray-700/30 text-center">
+            <p class="text-sm text-content-secondary">&copy; 2025 Kolae. Todos os direitos reservados.</p>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
 
     <script>
-        // Aguarda o DOM carregar para rodar o script, garantindo que o Swiper já baixou
+        // --------------------------
+        // LÓGICA DE TOGGLE DE TEMA
+        // --------------------------
+        function applyTheme(theme) {
+            const html = document.documentElement;
+            if (theme === 'dark') {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        function initializeTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            let initialTheme;
+
+            if (savedTheme) {
+                initialTheme = savedTheme;
+            } else {
+                const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                initialTheme = systemPrefersDark ? 'dark' : 'light';
+            }
+
+            applyTheme(initialTheme);
+
+            const themeToggle = document.getElementById('theme-toggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('click', () => {
+                    const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+                    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                    applyTheme(newTheme);
+                });
+            }
+        }
+
+        // --------------------------
+        // SCRIPTS GERAIS (SWIPER, DROPDOWN)
+        // --------------------------
         document.addEventListener("DOMContentLoaded", function() {
 
+            // Inicia o Tema
+            initializeTheme();
+
+            // Swiper
             var swiper = new Swiper(".intro-carousel", {
                 slidesPerView: 1,
                 spaceBetween: 30,
@@ -311,7 +351,7 @@
                 }
             });
 
-            // User Menu Dropdown Logic
+            // Dropdown do Usuário
             const userMenuButton = document.getElementById('user-menu-button');
             const profileDropdown = document.getElementById('profile-dropdown');
 

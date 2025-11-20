@@ -3,10 +3,10 @@
 @layer theme, base, components, utilities;
 @layer theme {
   :root, :host {
-    --font-sans: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-    'Noto Color Emoji';
-    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
-    monospace;
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
     --color-red-100: oklch(93.6% 0.032 17.717);
     --color-red-300: oklch(80.8% 0.114 19.571);
     --color-red-400: oklch(70.4% 0.191 22.216);
@@ -103,6 +103,12 @@
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
+    --color-surface-base: var(--color-surface-base);
+    --color-surface-secondary: var(--color-surface-secondary);
+    --color-surface-elevated: var(--color-surface-elevated);
+    --color-content-primary: var(--color-content-primary);
+    --color-content-secondary: var(--color-content-secondary);
+    --color-border-default: var(--color-border-default);
   }
 }
 @layer base {
@@ -116,7 +122,7 @@
     line-height: 1.5;
     -webkit-text-size-adjust: 100%;
     tab-size: 4;
-    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji');
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
     font-feature-settings: var(--default-font-feature-settings, normal);
     font-variation-settings: var(--default-font-variation-settings, normal);
     -webkit-tap-highlight-color: transparent;
@@ -143,7 +149,7 @@
     font-weight: bolder;
   }
   code, kbd, samp, pre {
-    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace);
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
     font-feature-settings: var(--default-mono-font-feature-settings, normal);
     font-variation-settings: var(--default-mono-font-variation-settings, normal);
     font-size: 1em;
@@ -243,13 +249,13 @@
   :-moz-ui-invalid {
     box-shadow: none;
   }
-  button, input:where([type='button'], [type='reset'], [type='submit']), ::file-selector-button {
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
     appearance: button;
   }
   ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
     height: auto;
   }
-  [hidden]:where(:not([hidden='until-found'])) {
+  [hidden]:where(:not([hidden="until-found"])) {
     display: none !important;
   }
 }
@@ -316,6 +322,9 @@
   .top-5 {
     top: calc(var(--spacing) * 5);
   }
+  .top-24 {
+    top: calc(var(--spacing) * 24);
+  }
   .top-full {
     top: 100%;
   }
@@ -334,20 +343,11 @@
   .right-4 {
     right: calc(var(--spacing) * 4);
   }
-  .right-5 {
-    right: calc(var(--spacing) * 5);
-  }
-  .right-6 {
-    right: calc(var(--spacing) * 6);
-  }
   .bottom-0 {
     bottom: calc(var(--spacing) * 0);
   }
   .bottom-4 {
     bottom: calc(var(--spacing) * 4);
-  }
-  .bottom-24 {
-    bottom: calc(var(--spacing) * 24);
   }
   .left-0 {
     left: calc(var(--spacing) * 0);
@@ -384,9 +384,6 @@
   }
   .z-\[-1\] {
     z-index: -1;
-  }
-  .z-\[60\] {
-    z-index: 60;
   }
   .order-last {
     order: 9999;
@@ -468,9 +465,6 @@
   }
   .mr-2 {
     margin-right: calc(var(--spacing) * 2);
-  }
-  .mr-2\.5 {
-    margin-right: calc(var(--spacing) * 2.5);
   }
   .mr-3 {
     margin-right: calc(var(--spacing) * 3);
@@ -768,9 +762,6 @@
   .cursor-pointer {
     cursor: pointer;
   }
-  .resize-none {
-    resize: none;
-  }
   .appearance-none {
     appearance: none;
   }
@@ -846,13 +837,6 @@
       --tw-space-y-reverse: 0;
       margin-block-start: calc(calc(var(--spacing) * 2) * var(--tw-space-y-reverse));
       margin-block-end: calc(calc(var(--spacing) * 2) * calc(1 - var(--tw-space-y-reverse)));
-    }
-  }
-  .space-y-3 {
-    :where(& > :not(:last-child)) {
-      --tw-space-y-reverse: 0;
-      margin-block-start: calc(calc(var(--spacing) * 3) * var(--tw-space-y-reverse));
-      margin-block-end: calc(calc(var(--spacing) * 3) * calc(1 - var(--tw-space-y-reverse)));
     }
   }
   .space-y-4 {
@@ -1035,6 +1019,18 @@
   .border-gray-700 {
     border-color: var(--color-gray-700);
   }
+  .border-gray-700\/20 {
+    border-color: color-mix(in srgb, oklch(37.3% 0.034 259.733) 20%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      border-color: color-mix(in oklab, var(--color-gray-700) 20%, transparent);
+    }
+  }
+  .border-gray-700\/30 {
+    border-color: color-mix(in srgb, oklch(37.3% 0.034 259.733) 30%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      border-color: color-mix(in oklab, var(--color-gray-700) 30%, transparent);
+    }
+  }
   .border-gray-700\/50 {
     border-color: color-mix(in srgb, oklch(37.3% 0.034 259.733) 50%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
@@ -1118,12 +1114,6 @@
   }
   .bg-\[\#0D1117\] {
     background-color: #0D1117;
-  }
-  .bg-\[\#0D1117\]\/80 {
-    background-color: color-mix(in oklab, #0D1117 80%, transparent);
-  }
-  .bg-\[\#1c2128\] {
-    background-color: #1c2128;
   }
   .bg-\[\#161B22\] {
     background-color: #161B22;
@@ -1212,9 +1202,6 @@
       background-color: color-mix(in oklab, var(--color-gray-800) 80%, transparent);
     }
   }
-  .bg-gray-900 {
-    background-color: var(--color-gray-900);
-  }
   .bg-gray-900\/30 {
     background-color: color-mix(in srgb, oklch(21% 0.034 264.665) 30%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
@@ -1283,6 +1270,21 @@
   }
   .bg-red-600 {
     background-color: var(--color-red-600);
+  }
+  .bg-surface-base {
+    background-color: var(--color-surface-base);
+  }
+  .bg-surface-elevated {
+    background-color: var(--color-surface-elevated);
+  }
+  .bg-surface-elevated\/80 {
+    background-color: var(--color-surface-elevated);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-surface-elevated) 80%, transparent);
+    }
+  }
+  .bg-surface-secondary {
+    background-color: var(--color-surface-secondary);
   }
   .bg-white {
     background-color: var(--color-white);
@@ -1672,6 +1674,15 @@
   }
   .text-blue-400 {
     color: var(--color-blue-400);
+  }
+  .text-blue-600 {
+    color: var(--color-blue-600);
+  }
+  .text-content-primary {
+    color: var(--color-content-primary);
+  }
+  .text-content-secondary {
+    color: var(--color-content-secondary);
   }
   .text-cyan-300 {
     color: var(--color-cyan-300);
@@ -2096,11 +2107,6 @@
       border-width: 0px;
     }
   }
-  .focus-within\:border-cyan-500 {
-    &:focus-within {
-      border-color: var(--color-cyan-500);
-    }
-  }
   .hover\:translate-x-1 {
     &:hover {
       @media (hover: hover) {
@@ -2131,6 +2137,16 @@
         --tw-scale-x: 105%;
         --tw-scale-y: 105%;
         --tw-scale-z: 105%;
+        scale: var(--tw-scale-x) var(--tw-scale-y);
+      }
+    }
+  }
+  .hover\:scale-110 {
+    &:hover {
+      @media (hover: hover) {
+        --tw-scale-x: 110%;
+        --tw-scale-y: 110%;
+        --tw-scale-z: 110%;
         scale: var(--tw-scale-x) var(--tw-scale-y);
       }
     }
@@ -2279,6 +2295,13 @@
         @supports (color: color-mix(in lab, red, red)) {
           background-color: color-mix(in oklab, var(--color-red-500) 10%, transparent);
         }
+      }
+    }
+  }
+  .hover\:bg-surface-secondary {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-surface-secondary);
       }
     }
   }
@@ -2988,6 +3011,34 @@
     @media (width >= 80rem) {
       grid-template-columns: repeat(5, minmax(0, 1fr));
     }
+  }
+  .dark\:block {
+    @media (prefers-color-scheme: dark) {
+      display: block;
+    }
+  }
+  .dark\:hidden {
+    @media (prefers-color-scheme: dark) {
+      display: none;
+    }
+  }
+}
+@layer base {
+  :root {
+    --color-surface-base: #ffffff;
+    --color-surface-secondary: #f3f4f6;
+    --color-surface-elevated: #e5e7eb;
+    --color-content-primary: #111827;
+    --color-content-secondary: #4b5563;
+    --color-border-default: #e5e7eb;
+  }
+  :root.dark {
+    --color-surface-base: #0d1117;
+    --color-surface-elevated: #21262d;
+    --color-surface-secondary: #161b22;
+    --color-content-primary: #ffffff;
+    --color-content-secondary: #99a1af;
+    --color-border-default: #30363d;
   }
 }
 @property --tw-translate-x {
