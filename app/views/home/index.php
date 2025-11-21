@@ -1,5 +1,9 @@
+<?php
+
+require_once __DIR__ . '/../../../Includes/i18n.php';
+?>
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="<?php echo $_SESSION['idioma']; ?>">
 
 <head>
     <meta charset="UTF-8">
@@ -86,62 +90,118 @@
 
             <nav class="hidden md:block">
                 <ul class="flex items-center space-x-10">
-                    <li><a href="#sobre-nos" class="font-semibold hover:text-cyan-400 transition-colors">Sobre Nós</a></li>
+                    <li><a href="#sobre-nos" class="font-semibold hover:text-cyan-400 transition-colors"><?php echo $lang['global_menu_about']; ?></a></li>
+
 
                     <?php if ($isLoggedIn): ?>
-                        <li><a href="<?php echo BASE_URL; ?>/dashboard" class="font-bold text-cyan-400 hover:text-cyan-300 transition-colors border border-cyan-400 px-4 py-2 rounded-full">Meu Painel</a></li>
+                        <li><a href="<?php echo BASE_URL; ?>/dashboard" class="font-bold text-cyan-400 hover:text-cyan-300 transition-colors border border-cyan-400 px-4 py-2 rounded-full"><?php echo $lang['global_home_panel']; ?></a></li>
                     <?php endif; ?>
                 </ul>
+
             </nav>
+            <div class="flex item-center gap-6">
 
-            <div class="relative">
-                <div id="user-menu-button" class="flex items-center gap-4 p-2 border border-gray-700 rounded-full cursor-pointer transition-colors hover:bg-gray-800 bg-[#0D1117]/80 backdrop-blur-sm">
-                    <i class="fas fa-bars text-lg ml-2"></i>
+            <button id="lang-btn">
+                <img src="assets/img/language.png" class="h-10 w-10 transition hover:opacity-60">
+            </button>
 
-                    <?php if ($isLoggedIn): ?>
-                        <?php if (!empty($_SESSION['user_avatar'])): ?>
-                            <img src="<?php echo BASE_URL . '/uploads/avatars/' . $_SESSION['user_id'] . '/' . $_SESSION['user_avatar']; ?>"
-                                class="w-8 h-8 rounded-full object-cover border border-gray-600"
-                                alt="Avatar"
-                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div id="lang-modal"
+                class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 opacity-0 invisible transition-opacity duration-300">
 
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-bold text-sm" style="display:none;">
-                                <?php echo strtoupper(substr($userName, 0, 1)); ?>
-                            </div>
-                        <?php else: ?>
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-bold text-sm">
-                                <?php echo strtoupper(substr($userName, 0, 1)); ?>
-                            </div>
-                        <?php endif; ?>
-                    <?php else: ?>
-                        <i class="fas fa-user-circle text-3xl text-gray-400"></i>
-                    <?php endif; ?>
-                </div>
+                <div id="lang-box"
+                    class="bg-[#1c2128] border border-gray-700 rounded-xl shadow-2xl w-72 p-4 transform scale-90 opacity-0 transition-all duration-300">
 
-                <div id="profile-dropdown" class="absolute top-full right-0 mt-4 w-72 bg-[#1c2128] border border-gray-700 rounded-xl shadow-2xl opacity-0 invisible transform -translate-y-2 transition-all duration-300 z-50">
-                    <ul class="py-2">
+                    <h3 class="text-gray-200 text-lg font-semibold mb-3 text-center" ><?php echo $lang['global_button_language']?></h3>
 
-                        <li class="md:hidden"><a href="#sobre-nos" class="flex items-center gap-4 px-5 py-3 text-sm hover:bg-gray-800 transition-colors"><i class="fas fa-info-circle w-5 text-center text-gray-400"></i> Sobre Nós</a></li>
+                    <ul class="space-y-2 text-gray-300">
 
-                        <li class="border-t border-gray-700 my-2 md:hidden"></li>
+                        <li>
+                            <button class="w-full text-left px-3 py-2 rounded hover:bg-gray-800 transition-colors" data-lang="pt-br">
+                                Português
+                            </button>
+                        </li>
 
-                        <?php if ($isLoggedIn): ?>
-                            <li>
-                                <div class="px-5 py-2 text-xs text-gray-500 uppercase font-bold">Conta</div>
-                            </li>
-                            <li><a href="<?php echo BASE_URL; ?>/dashboard" class="flex items-center gap-4 px-5 py-3 text-sm hover:bg-gray-800 transition-colors"><i class="fas fa-columns w-5 text-center text-cyan-400"></i> Meu Painel</a></li>
-                            <li><a href="<?php echo BASE_URL; ?>/dashboard/perfil" class="flex items-center gap-4 px-5 py-3 text-sm hover:bg-gray-800 transition-colors"><i class="fas fa-user-cog w-5 text-center text-gray-400"></i> Perfil</a></li>
-                            <li class="border-t border-gray-700 my-2"></li>
-                            <li><a href="<?php echo BASE_URL; ?>/logout" class="flex items-center gap-4 px-5 py-3 text-sm text-red-400 hover:bg-gray-800 transition-colors"><i class="fas fa-sign-out-alt w-5 text-center"></i> Sair</a></li>
+                        <li>
+                            <button class="w-full text-left px-3 py-2 rounded hover:bg-gray-800 transition-colors" data-lang="es-es">
+                                Español
+                            </button>
+                        </li>
 
-                        <?php else: ?>
-                            <li><a href="<?php echo BASE_URL; ?>/login" class="flex items-center gap-4 px-5 py-3 text-sm hover:bg-gray-800 transition-colors"><i class="fas fa-sign-in-alt w-5 text-center text-gray-400"></i> Entrar</a></li>
-                            <li><a href="<?php echo BASE_URL; ?>/register" class="flex items-center gap-4 px-5 py-3 text-sm font-bold text-cyan-400 hover:bg-gray-800 transition-colors"><i class="fas fa-user-plus w-5 text-center"></i> Cadastre-se</a></li>
-                        <?php endif; ?>
+                        <li>
+                            <button class="w-full text-left px-3 py-2 rounded hover:bg-gray-800 transition-colors" data-lang="en-us">
+                                English
+                            </button>
+                        </li>
+
+                        <li>
+                            <button class="w-full text-left px-3 py-2 rounded hover:bg-gray-800 transition-colors" data-lang="zh-cn">
+                                普通话
+                            </button>
+                        </li>
+
+                        <li>
+                            <button class="w-full text-left px-3 py-2 rounded hover:bg-gray-800 transition-colors" data-lang="hi-in">
+                                हिंदी
+                            </button>
+                        </li>
 
                     </ul>
                 </div>
             </div>
+
+                
+                <div class="relative">
+                    <div id="user-menu-button" class="flex items-center gap-4 p-2 border border-gray-700 rounded-full cursor-pointer transition-colors hover:bg-gray-800 bg-[#0D1117]/80 backdrop-blur-sm">
+                        <i class="fas fa-bars text-lg ml-2"></i>
+
+                        <?php if ($isLoggedIn): ?>
+                            <?php if (!empty($_SESSION['user_avatar'])): ?>
+                                <img src="<?php echo BASE_URL . '/uploads/avatars/' . $_SESSION['user_id'] . '/' . $_SESSION['user_avatar']; ?>"
+                                    class="w-8 h-8 rounded-full object-cover border border-gray-600"
+                                    alt="Avatar"
+                                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+
+                                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-bold text-sm" style="display:none;">
+                                    <?php echo strtoupper(substr($userName, 0, 1)); ?>
+                                </div>
+                            <?php else: ?>
+                                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-bold text-sm">
+                                    <?php echo strtoupper(substr($userName, 0, 1)); ?>
+                                </div>
+                            <?php endif; ?>
+                        <?php else: ?>
+                            <i class="fas fa-user-circle text-3xl text-gray-400"></i>
+                        <?php endif; ?>
+                    </div>
+
+
+
+                    <div id="profile-dropdown" class="absolute top-full right-0 mt-4 w-72 bg-[#1c2128] border border-gray-700 rounded-xl shadow-2xl opacity-0 invisible transform -translate-y-2 transition-all duration-300 z-50">
+                        <ul class="py-2">
+
+                            <li class="md:hidden"><a href="#sobre-nos" class="flex items-center gap-4 px-5 py-3 text-sm hover:bg-gray-800 transition-colors"><i class="fas fa-info-circle w-5 text-center text-gray-400"></i><?php echo $lang['global_title_about'];?></a></li>
+
+                            <li class="border-t border-gray-700 my-2 md:hidden"></li>
+
+                            <?php if ($isLoggedIn): ?>
+                                <li>
+                                    <div class="px-5 py-2 text-xs text-gray-500 uppercase font-bold">Conta</div>
+                                </li>
+                                <li><a href="<?php echo BASE_URL; ?>/dashboard" class="flex items-center gap-4 px-5 py-3 text-sm hover:bg-gray-800 transition-colors"><i class="fas fa-columns w-5 text-center text-cyan-400"></i> <?php echo $lang['global_home_panel'];?></a></li>
+                                <li><a href="<?php echo BASE_URL; ?>/dashboard/perfil" class="flex items-center gap-4 px-5 py-3 text-sm hover:bg-gray-800 transition-colors"><i class="fas fa-user-cog w-5 text-center text-gray-400"></i><?php echo $lang['global_menu_profile'];?></a></li>
+                                <li class="border-t border-gray-700 my-2"></li>
+                                <li><a href="<?php echo BASE_URL; ?>/logout" class="flex items-center gap-4 px-5 py-3 text-sm text-red-400 hover:bg-gray-800 transition-colors"><i class="fas fa-sign-out-alt w-5 text-center"></i><?php echo $lang['global_menu_exit'];?> </a></li>
+
+                            <?php else: ?>
+                                <li><a href="<?php echo BASE_URL; ?>/login" class="flex items-center gap-4 px-5 py-3 text-sm hover:bg-gray-800 transition-colors"><i class="fas fa-sign-in-alt w-5 text-center text-gray-400"></i> <?php echo $lang['global_title_panelabout'];?></a></li>
+                                <li><a href="<?php echo BASE_URL; ?>/register" class="flex items-center gap-4 px-5 py-3 text-sm font-bold text-cyan-400 hover:bg-gray-800 transition-colors"><i class="fas fa-user-plus w-5 text-center"></i><?php $lang['global_menu_register'];?></a></li>
+                            <?php endif; ?>
+
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div> 
         </div>
     </header>
 
@@ -163,17 +223,17 @@
             <div class="absolute top-0 left-0 w-full h-full bg-black/60 z-[-1]"></div>
 
             <div class="container mx-auto px-4 relative z-10">
-                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold max-w-lg leading-tight mx-auto md:mx-0">Cole com quem ama esporte</h1>
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold max-w-lg leading-tight mx-auto md:mx-0"><?php echo $lang['global_slogan_headline'];?></h1>
                 <div class="flex flex-wrap gap-4 mt-8 justify-center md:justify-start">
-                    <a href="<?php echo BASE_URL; ?>/login" class="py-3 px-8 rounded-full font-semibold transition-all duration-300 bg-white text-black border-2 border-white hover:bg-transparent hover:text-white">Comece de graça</a>
+                    <a href="<?php echo BASE_URL; ?>/login" class="py-3 px-8 rounded-full font-semibold transition-all duration-300 bg-white text-black border-2 border-white hover:bg-transparent hover:text-white"><?php echo $lang['home_start_free'];?></a>
                 </div>
             </div>
         </section>
 
         <section class="bg-[#161B22] py-16 md:py-24 overflow-hidden">
             <div class="container mx-auto px-4 text-center">
-                <h2 class="text-3xl md:text-4xl font-bold max-w-2xl mx-auto">Conecte-se com quem compartilha a sua paixão pelo esporte.</h2>
-                <p class="max-w-3xl mx-auto mt-4 text-gray-400">Encontre atletas com os mesmos interesses, nível de habilidade e na sua região. Mais do que uma conexão, é o seu novo time.</p>
+                <h2 class="text-3xl md:text-4xl font-bold max-w-2xl mx-auto"><?php echo $lang['home_connect_message'];?></h2>
+                <p class="max-w-3xl mx-auto mt-4 text-gray-400"><?php echo $lang['home_search_message'];?></p>
             </div>
             <div class="container mx-auto px-4 mt-12 md:mt-16 pb-10">
                 <div class="swiper intro-carousel h-[480px]">
@@ -208,18 +268,18 @@
                     <img src="./assets/img/about_us_img.png" alt="Atletas celebrando juntos" class="w-full rounded-xl" loading="lazy" decoding="async">
                 </div>
                 <div class="text-center lg:text-left">
-                    <h2 class="text-3xl md:text-4xl font-bold">Nossa Missão é Conectar Atletas</h2>
-                    <p class="mt-4 text-gray-400">Acreditamos que o esporte tem o poder de unir pessoas, criar comunidades e transformar vidas. A Kolae nasceu do desejo de facilitar essa conexão, oferecendo uma plataforma onde atletas de todos os níveis podem encontrar parceiros de treino, equipes e eventos na sua região.</p>
+                    <h2 class="text-3xl md:text-4xl font-bold"><?php echo $lang['global_title_about'];?></h2>
+                    <p class="mt-4 text-gray-400"><?php echo $lang['global_text_about'];?></p>
                     <div class="mt-8 flex flex-col sm:flex-row gap-8 justify-center lg:justify-start">
                         <div>
                             <i class="fas fa-users text-cyan-400 text-3xl mb-3"></i>
-                            <h3 class="text-lg font-bold">Comunidade</h3>
-                            <p class="text-sm text-gray-400">Construa seu time e faça parte de uma rede de atletas apaixonados.</p>
+                            <h3 class="text-lg font-bold"><?php echo $lang['home_title_community'];?></h3>
+                            <p class="text-sm text-gray-400"><?php echo $lang['home_text_community'];?></p>
                         </div>
                         <div>
                             <i class="fas fa-map-marker-alt text-cyan-400 text-3xl mb-3"></i>
-                            <h3 class="text-lg font-bold">Conexão Local</h3>
-                            <p class="text-sm text-gray-400">Encontre treinos e jogos perto de você, a qualquer hora.</p>
+                            <h3 class="text-lg font-bold"><?php echo $lang['home_title_location'];?></h3>
+                            <p class="text-sm text-gray-400"><?php echo $lang['home_text_location'];?></p>
                         </div>
                     </div>
                 </div>
@@ -228,8 +288,8 @@
 
         <section class="bg-[#161B22] py-16 md:py-24">
             <div class="container mx-auto px-4 text-center">
-                <h2 class="text-3xl md:text-4xl font-bold">Parceiros que fortalecem o esporte</h2>
-                <p class="max-w-3xl mx-auto mt-4 text-gray-400">Conheça as marcas que apoiam o crescimento do esporte e da nossa comunidade.</p>
+                <h2 class="text-3xl md:text-4xl font-bold"><?php echo $lang['home_title_supporters'];?></h2>
+                <p class="max-w-3xl mx-auto mt-4 text-gray-400"><?php echo $lang['home_text_supporters'];?></p>
             </div>
             <div class="w-full overflow-hidden relative mt-16 [mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)]">
                 <div class="flex animate-scroll hover:[animation-play-state:paused]">
@@ -254,7 +314,7 @@
         <div class="container mx-auto px-4 grid md:grid-cols-2 lg:grid-cols-3 gap-12">
             <div class="mb-8 text-center md:text-left">
                 <img src="<?php echo BASE_URL; ?>/assets/img/kolae_branca.png" alt="Logo Kolae" class="h-10 mx-auto md:mx-0" loading="lazy">
-                <p class="text-sm text-gray-400 mt-4">Conectando atletas, fortalecendo o esporte.</p>
+                <p class="text-sm text-gray-400 mt-4"><?php echo $lang['home_footer_activity'];?></p>
                 <div class="flex space-x-4 mt-6 justify-center md:justify-start">
                     <a href="#" class="text-xl hover:text-cyan-400 transition-colors" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                     <a href="#" class="text-xl hover:text-cyan-400 transition-colors" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
@@ -262,13 +322,13 @@
                 </div>
             </div>
             <div class="mb-8 text-center md:text-left">
-                <h3 class="text-lg font-semibold mb-4">Contato</h3>
+                <h3 class="text-lg font-semibold mb-4"><?php echo $lang['global_contact_kolae'];?></h3>
                 <p class="text-sm text-gray-400"><a href="mailto:kolae.gg@gmail.com" class="hover:text-cyan-400 transition-colors">kolae.gg@gmail.com</a></p>
                 <p class="text-sm text-gray-400 mt-2">+55 (11) 99860-0253</p>
             </div>
             <div class="mb-8 text-center md:text-left">
-                <h3 class="text-lg font-semibold mb-4">Receba nossas novidades</h3>
-                <p class="text-sm text-gray-400">Cadastre-se para ficar por dentro dos próximos eventos e atualizações.</p>
+                <h3 class="text-lg font-semibold mb-4"><?php echo $lang['home_footer_activity'];?></h3>
+                <p class="text-sm text-gray-400"><?php echo $lang['home_footer_register'];?></p>
                 <form class="flex mt-4">
                     <input type="email" class="sr-only" placeholder="Seu melhor e-mail" required class="w-full bg-gray-900 border border-gray-700 rounded-l-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-400">
                     <button type="submit" aria-label="Enviar email" class="bg-cyan-400 text-black font-bold px-4 py-2 rounded-r-md hover:bg-cyan-300 transition-colors"><i class="fas fa-paper-plane"></i></button>
@@ -282,58 +342,108 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
 
-    <script>
-        // Aguarda o DOM carregar para rodar o script, garantindo que o Swiper já baixou
-        document.addEventListener("DOMContentLoaded", function() {
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
 
-            var swiper = new Swiper(".intro-carousel", {
-                slidesPerView: 1,
-                spaceBetween: 30,
-                slidesPerGroup: 1,
-                loop: true,
-                pagination: {
-                    el: ".swiper-pagination",
-                    clickable: true,
-                },
-                autoplay: {
-                    delay: 3500,
-                    disableOnInteraction: false,
-                },
-                breakpoints: {
-                    768: {
-                        slidesPerView: 2,
-                        slidesPerGroup: 2
-                    },
-                    1024: {
-                        slidesPerView: 3,
-                        slidesPerGroup: 3
-                    }
+<script>
+    // Função de geração de link de idioma
+    function generateLangLink(langCode) {
+        let currentUri = window.location.pathname + window.location.search;
+
+        currentUri = currentUri.replace(/(\?|&)?lang=[^&]*/g, '');
+
+        const separator = currentUri.includes('?') ? '&' : '?';
+
+        return currentUri + separator + 'lang=' + langCode;
+    }
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+
+        // --- 1. Inicialização do Swiper
+        var swiper = new Swiper(".intro-carousel", {
+
+            slidesPerView: 1,
+            spaceBetween: 30,
+            slidesPerGroup: 1,
+            loop: true,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            autoplay: {
+                delay: 3500,
+                disableOnInteraction: false,
+            },
+            breakpoints: {
+                768: { slidesPerView: 2, slidesPerGroup: 2 },
+                1024: { slidesPerView: 3, slidesPerGroup: 3 }
+            }
+        });
+
+
+        // --- 2. Lógica do Modal de Idioma (UNIFICADA) ---
+        const langBtn = document.getElementById('lang-btn');
+        const langModal = document.getElementById('lang-modal');
+        const langBox = document.getElementById('lang-box');
+
+        // A. Abrir o modal ao clicar no botão da bandeira
+        if (langBtn) {
+            langBtn.addEventListener('click', () => {
+                langModal.classList.remove('opacity-0', 'invisible');
+                langBox.classList.remove('opacity-0', 'scale-90');
+            });
+        }
+
+        // B. Fechar o modal ao clicar fora dele
+        if (langModal && langBox) {
+            langModal.addEventListener('click', (e) => {
+                // Verifica se o clique NÃO foi dentro da caixa (langBox)
+                if (!langBox.contains(e.target)) {
+                    langModal.classList.add('opacity-0', 'invisible');
+                    langBox.classList.add('opacity-0', 'scale-90');
                 }
             });
+        }
 
-            // User Menu Dropdown Logic
-            const userMenuButton = document.getElementById('user-menu-button');
-            const profileDropdown = document.getElementById('profile-dropdown');
 
-            if (userMenuButton) {
-                userMenuButton.addEventListener('click', (event) => {
-                    event.stopPropagation();
-                    profileDropdown.classList.toggle('opacity-0');
-                    profileDropdown.classList.toggle('invisible');
-                    profileDropdown.classList.toggle('transform');
-                    profileDropdown.classList.toggle('-translate-y-2');
+        // --- 3. Lógica de Troca de Idioma (Correto) ---
+        const langButtons = document.querySelectorAll('#lang-box button');
+
+        langButtons.forEach(button => {
+            const langCode = button.getAttribute('data-lang');
+
+            if (langCode) {
+                button.addEventListener('click', () => {
+                    // Redireciona para a nova URL gerada
+                    window.location.href = generateLangLink(langCode);
                 });
             }
-
-            window.addEventListener('click', (event) => {
-                if (profileDropdown && !profileDropdown.classList.contains('invisible')) {
-                    if (!profileDropdown.contains(event.target) && !userMenuButton.contains(event.target)) {
-                        profileDropdown.classList.add('opacity-0', 'invisible', '-translate-y-2');
-                    }
-                }
-            });
         });
-    </script>
+
+
+        // --- 4. Lógica do Dropdown do Usuário (Correto) ---
+        const userMenuButton = document.getElementById('user-menu-button');
+        const profileDropdown = document.getElementById('profile-dropdown');
+
+        if (userMenuButton) {
+            userMenuButton.addEventListener('click', (event) => {
+                event.stopPropagation();
+                profileDropdown.classList.toggle('opacity-0');
+                profileDropdown.classList.toggle('invisible');
+                profileDropdown.classList.toggle('transform');
+                profileDropdown.classList.toggle('-translate-y-2');
+            });
+        }
+
+        window.addEventListener('click', (event) => {
+            if (profileDropdown && !profileDropdown.classList.contains('invisible')) {
+                if (!profileDropdown.contains(event.target) && !userMenuButton.contains(event.target)) {
+                    profileDropdown.classList.add('opacity-0', 'invisible', '-translate-y-2');
+                }
+            }
+        });
+    });
+</script>
 </body>
 
-</html>
+</html
