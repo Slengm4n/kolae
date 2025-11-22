@@ -40,7 +40,7 @@ return[
     'login_title_welcome' => '欢迎回来',
     'login_subtitle_welcome' => '登录您的账户以继续',
 
-    // Forms do login (Placeholder)
+    // Forms do login 
     'login_email_ph' => '电子邮件',
     'login_senha_ph' => '密码',
     'login_remember' => '记住我',
@@ -50,9 +50,34 @@ return[
     // Login botao de cadastrar
     'login_text_register' => '还没有账户？',
 
-    //ERROS
+    //Mensagens (Login)
+    'message_password_redefinition' => '密码重置成功！请登录。',
+    'message_registration_success' => '注册成功！请登录以继续。',
+
+    //ERROS (LOGIN)
     'error_incorrect_access' => '电子邮件或密码不正确。请再试一次。',
     'error_invalid_token' => '重置链接无效或已被使用。',
     'error_account_inactive' => '此账户处于非活动状态。请联系支持。',
     'unknown_error' => '发生未知错误。',
+
+    // Esqueceu a senha
+    'forget_title_back' => '让我们助您重回赛场。',
+    'forget_subtitle_back' => '恢复您的访问权限，不错过任何连接的机会。',
+
+    'forget_title_password' => '忘记密码',
+    'forget_subtitle_password' => '没问题！输入您的电子邮件，我们将发送一个链接供您创建新密码。',
+
+    'forget_email_registred' => '输入您注册的电子邮件',
+
+    // Botão para recuperar a senha
+    'forget_btn_recover' => '发送恢复链接',
+
+    'remember_passoword_text' => '想起密码了？',
+
+    'remember_password_btn' => '返回登录',
+
+    // Messages (Esqueceu a senha)
+    'email_exists' => '如果存在此电子邮件地址的账户，则已发送链接。',
+    // Erros
+    'email_invalid' => '请输入有效的电子邮件。',
 ];

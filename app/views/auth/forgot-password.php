@@ -1,7 +1,9 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<?php
 
-<head>
+require_once __DIR__ . '/../../../Includes/i18n.php';
+?>
+<!DOCTYPE html>
+<html lang="<?php echo $_SESSION['idioma']; ?>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kolae</title>
@@ -70,8 +72,8 @@
             <div class="absolute inset-0 bg-black/60"></div>
             <div class="relative z-10 text-center px-12 animate-fadeInUp">
                 <img src="<?php echo BASE_URL; ?>/assets/img/kolae_branca.png" alt="Logo Kolae" class="h-16 mx-auto mb-6 drop-shadow-lg">
-                <h1 class="text-4xl font-bold leading-tight drop-shadow-md">Vamos te colocar de volta no jogo.</h1>
-                <p class="mt-4 text-lg text-gray-200 drop-shadow-md">Recupere seu acesso e não perca nenhuma oportunidade de se conectar.</p>
+                <h1 class="text-4xl font-bold leading-tight drop-shadow-md"><?php echo $lang['forget_title_back']; ?></h1>
+                <p class="mt-4 text-lg text-gray-200 drop-shadow-md"><?php echo $lang['forget_subtitle_back']; ?></p>
             </div>
         </div>
 
@@ -89,44 +91,44 @@
                     <img src="<?php echo BASE_URL; ?>/assets/img/kolae_branca.png" alt="Logo Kolae" class="h-12 mx-auto drop-shadow-lg">
                 </a>
 
-                <h2 class="text-3xl font-bold text-center mb-2">Esqueceu sua senha?</h2>
-                <p class="text-gray-400 text-center mb-8">Sem problemas! Digite seu e-mail e enviaremos um link para você criar uma nova.</p>
+                <h2 class="text-3xl font-bold text-center mb-2"><?php echo $lang['forget_title_password']; ?></h2>
+                <p class="text-gray-400 text-center mb-8"><?php echo $lang['forget_subtitle_password']; ?></p>
 
                 <?php
                 if (isset($_GET['status']) && $_GET['status'] === 'sent') {
                     echo '<div class="bg-green-500/20 border border-green-500/50 text-green-300 px-4 py-3 rounded-lg text-center mb-6 text-sm backdrop-blur-sm animate-fadeInUp">'
-                        . 'Se um e-mail com este endereço existir, um link foi enviado.'
+                        . $lang['email_exists']
                         . '</div>';
                 }
                 if (isset($_GET['error']) && $_GET['error'] === 'invalid_email') {
                     echo '<div class="bg-red-500/20 border border-red-500/50 text-red-300 px-4 py-3 rounded-lg text-center mb-6 text-sm backdrop-blur-sm animate-fadeInUp">'
-                        . 'Por favor, insira um e-mail válido.'
+                        . $lang['email_invalid']
                         . '</div>';
                 }
                 ?>
 
                 <form action="<?= BASE_URL ?>/forgot-password" method="POST" class="space-y-6" id="forgot-form">
                     <div>
-                        <label for="email" class="block text-sm font-medium text-gray-300 ml-1">Email</label>
+                        <label for="email" class="block text-sm font-medium text-gray-300 ml-1"><?php echo $lang['global_email']; ?></label>
                         <div class="mt-1 relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <i class="fas fa-envelope text-gray-500"></i>
                             </div>
-                            <input id="email" name="email" type="email" autocomplete="email" placeholder="Digite seu E-mail cadastrado" required
+                            <input id="email" name="email" type="email" autocomplete="email" placeholder="<?php echo $lang['forget_email_registred']; ?>" required
                                 class="w-full bg-gray-900/50 border border-gray-600 rounded-lg pl-10 pr-4 py-3 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all">
                         </div>
                     </div>
 
                     <div>
                         <button id="submit-btn" type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-lg text-sm font-bold text-black bg-cyan-400 hover:bg-cyan-300 hover:shadow-cyan-400/20 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-cyan-400 transition-all duration-200 transform">
-                            Enviar Link de Recuperação
+                            <?php echo $lang['forget_btn_recover']; ?>
                         </button>
                     </div>
                 </form>
 
                 <p class="mt-8 text-center text-sm text-gray-400">
-                    Lembrou da senha?
-                    <a href="<?= BASE_URL ?>/login" class="font-medium text-cyan-400 hover:text-cyan-300 transition-colors hover:underline">Voltar para o Login</a>
+                    <?php echo $lang['remember_passoword_text']; ?>
+                    <a href="<?= BASE_URL ?>/login" class="font-medium text-cyan-400 hover:text-cyan-300 transition-colors hover:underline"><?php echo $lang['remember_password_btn']; ?></a>
                 </p>
             </div>
         </div>

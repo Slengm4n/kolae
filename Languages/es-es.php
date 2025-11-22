@@ -41,21 +41,47 @@ return[
     'login_title_welcome' => 'Bienvenido de nuevo',
     'login_subtitle_welcome' => 'Accede a tu cuenta para continuar',
 
-    // Forms do login (Placeholder)
+    // Forms do login
     'login_email_ph' => 'Correo electrónico',
     'login_senha_ph' => 'Contraseña',
     'login_remember' => 'Recordarme',
     'login_forget' => '¿Olvidaste la contraseña?',
     'login_btn_entry' => 'Entrar',
 
+
     // Login botao de cadastrar
     'login_text_register' => '¿No tienes una cuenta?',
 
-    //ERROS
+    //Mensagens (Login)
+    'message_password_redefinition' => '¡Contraseña restablecida con éxito! Por favor, inicia sesión.',
+    'message_registration_success' => '¡Registro realizado con éxito! Por favor, inicia sesión para continuar.',
+
+    //ERROS (LOGIN)
     'error_incorrect_access' => 'Correo electrónico o contraseña incorrectos. Inténtalo de nuevo.',
     'error_invalid_token' => 'El enlace de restablecimiento es inválido o ya ha sido utilizado.',
     'error_account_inactive' => 'Esta cuenta está inactiva. Contacta con soporte.',
     'unknown_error' => 'Ocurrió un error desconocido.',
+
+    // Esqueceu a senha
+    'forget_title_back' => 'Vamos a devolverte al juego.',
+    'forget_subtitle_back' => 'Recupera tu acceso y no pierdas ninguna oportunidad de conectar.',
+
+    'forget_title_password' => '¿Olvidó su contraseña?',
+    'forget_subtitle_password' => '¡No hay problema! Introduce tu correo electrónico y te enviaremos un enlace para crear uno nuevo.',
+
+    'forget_email_registred' => 'Introduce tu correo electrónico registrado',
+
+    // Botão para recuperar a senha
+    'forget_btn_recover' => 'Enviar Enlace de Recuperación',
+
+    'remember_passoword_text' => '¿Recordaste la contraseña?',
+
+    'remember_password_btn' => 'Volver a Iniciar Sesión',
+
+    // Messages (Esqueceu a senha)
+    'email_exists' => 'Si existe una cuenta con esta dirección de correo electrónico, se ha enviado un enlace.',
+    // Erros
+    'email_invalid' => 'Por favor, introduce un correo electrónico válido.',
 
     
 ];

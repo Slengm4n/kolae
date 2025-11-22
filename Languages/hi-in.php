@@ -40,7 +40,7 @@ return[
     'login_title_welcome' => 'वापस स्वागत है',
     'login_subtitle_welcome' => 'जारी रखने के लिए अपने खाते में प्रवेश करें',
 
-    // Forms do login (Placeholder)
+    // Forms do login 
     'login_email_ph' => 'ईमेल',
     'login_senha_ph' => 'पासवर्ड',
     'login_remember' => 'मुझे याद रखें',
@@ -50,8 +50,34 @@ return[
     // Login botao de cadastrar
     'login_text_register' => 'खाता नहीं है?',
 
+    //Mensagens (Login)
+    'message_password_redefinition' => 'पासवर्ड सफलतापूर्वक रीसेट किया गया! कृपया साइन इन करें।',
+    'message_registration_success' => 'पंजीकरण सफल रहा! जारी रखने के लिए कृपया साइन इन करें।',
+
+    //ERROS (LOGIN)
     'error_incorrect_access' => 'गलत ईमेल या पासवर्ड। कृपया पुनः प्रयास करें।',
     'error_invalid_token' => 'रीसेट लिंक अमान्य है या पहले ही उपयोग हो चुका है।',
     'error_account_inactive' => 'यह खाता निष्क्रिय है। कृपया समर्थन से संपर्क करें।',
     'unknown_error' => 'एक अज्ञात त्रुटि हुई।',
+
+    // Esqueceu a senha
+    'forget_title_back' => 'आइए, आपको वापस खेल में लाएँ।',
+    'forget_subtitle_back' => 'अपनी पहुँच पुनः प्राप्त करें और जुड़ने का कोई भी अवसर न चूकें।',
+
+    'forget_title_password' => 'अपना पासवर्ड भूल गए',
+    'forget_subtitle_password' => 'कोई बात नहीं! अपना ईमेल दर्ज करें और हम आपको एक नया बनाने के लिए एक लिंक भेजेंगे।',
+
+    'forget_email_registred' => 'अपना पंजीकृत ईमेल दर्ज करें',
+
+    // Botão para recuperar a senha
+    'forget_btn_recover' => 'पुनर्प्राप्ति लिंक भेजें',
+
+    'remember_passoword_text' => 'पासवर्ड याद है?',
+
+    'remember_password_btn' => 'साइन इन पर वापस जाएँ',
+
+    // Messages (Esqueceu a senha)
+    'email_exists' => 'यदि इस ईमेल पते वाला कोई खाता मौजूद है, तो एक लिंक भेजा गया है।',
+    // Erros
+    'email_invalid' => 'कृपया एक वैध ईमेल दर्ज करें।',
 ];

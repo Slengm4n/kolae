@@ -42,8 +42,8 @@ return[
     'login_title_welcome' => 'Welcome back',
     'login_subtitle_welcome' => 'Access your account to continue',
 
-    // Forms do login (Placeholder)
-    'login_email_ph' => 'Email',
+    // Forms do login
+    'login_email_ph' => 'Email', 
     'login_senha_ph' => 'Password',
     'login_remember' => 'Remember me',
     'login_forget' => 'Forgot password?',
@@ -52,11 +52,37 @@ return[
     // Login botao de cadastrar
     'login_text_register' => 'Don\'t have an account?',
 
-    //ERROS
+    //Mensagens (Login)
+    'message_password_redefinition' => 'Password successfully reset! Please sign in.',
+    'message_registration_success' => 'Registration successful! Please sign in to continue.',
+
+
+    //ERROS (LOGIN)
     'error_incorrect_access' => 'Incorrect email or password. Please try again.',
     'error_invalid_token' => 'The reset link is invalid or has already been used.',
     'error_account_inactive' => 'This account is inactive. Please contact support.',
     'unknown_error' => 'An unknown error occurred.',
+
+    // Esqueceu a senha
+    'forget_title_back' => 'Let\'s get you back in the game.',
+    'forget_subtitle_back' => 'Recover your access and don\'t miss any opportunities to connect.',
+
+    'forget_title_password' => 'Forgot your password?',
+    'forget_subtitle_password' => 'No problem! Enter your email and we\'ll send you a link to create a new one.',
+
+    'forget_email_registred' => 'Enter your registered email',
+
+    // Botão para recuperar a senha
+    'forget_btn_recover' => 'Send Recovery Link',
+
+    'remember_passoword_text' => 'Remember your password?',
+
+    'remember_password_btn' => 'Back to Sign In',
+
+    // Messages (Esqueceu a senha)
+    'email_exists' => 'If an account with this email address exists, a link has been sent.',
+    // Erros
+    'email_invalid' => 'Please enter a valid email.',
 
 
 ];

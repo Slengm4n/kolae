@@ -22,10 +22,10 @@ if (isset($_GET['error'])) {
     $messageType = 'success';
     switch ($_GET['status']) {
         case 'password_reset':
-            $message = 'Senha redefinida com sucesso! Faça o login.';
+            $message = $lang['message_password_redefinition'];
             break;
         case 'registered':
-            $message = 'Cadastro realizado! Faça o login para continuar.';
+            $message = $lang['message_registration_success'];
             break;
     }
 }

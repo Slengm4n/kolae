@@ -45,7 +45,7 @@ return[
     'login_title_welcome' => 'Bem-vindo de volta',
     'login_subtitle_welcome' => 'Acesse sua conta para continuar',
 
-    //Forms do login (Placeholder)
+    //Forms do login
     'login_email_ph' => 'Email',
     'login_senha_ph' => 'Senha',
     'login_remember' => 'Lembrar de mim',
@@ -55,10 +55,36 @@ return[
     //Login botao de cadastrar
     'login_text_register' => 'Não tem uma conta?',
 
-    //ERROS
+    //Mensagens (Login)
+    'message_password_redefinition' => 'Senha redefinida com sucesso! Faça o login.',
+    'message_registration_success' => 'Cadastro realizado! Faça o login para continuar.',
+
+    //ERROS (LOGIN)
     'error_incorrect_access' => 'E-mail ou senha incorretos. Tente novamente.',
     'error_invalid_token' => 'O link de redefinição é inválido ou já foi usado.',
     'error_account_inactive' => 'Esta conta está inativa. Contate o suporte.',
-    'unknown_error' => 'Ocorreu um erro desconhecido.'
+    'unknown_error' => 'Ocorreu um erro desconhecido.',
+
+    //Esqueceu a senha
+    'forget_title_back' => 'Vamos te colocar de volta no jogo.',
+    'forget_ subtitle_back' => 'Recupere seu acesso e não perca nenhuma oportunidade de se conectar.',
+
+    'forget_title_password' => 'Esqueceu a senha?',
+    'forget_subtitle_password' => 'Sem problemas! Digite seu e-mail e enviaremos um link para você criar uma nova.',
+
+    'forget_email_registred' => 'Digite o seu E-mail cadastrado',
+
+    //Botão para recuperar a senha
+    'forget_btn_recover' => 'Enviar Link de recuperação',
+
+    'remember_passoword_text' => 'Lembrou da senha?',
+
+    'remember_password_btn' => 'Voltar para o login',
+
+    //Messages (Esqueceu a senha)
+    'email_exists' => 'Se um e-mail com este endereço existir, um link foi enviado.',
+    //Erros
+    'email_invalid' => 'Por favor, insira um e-mail válido.',
+
 
 ];
