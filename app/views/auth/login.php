@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../../../Includes/i18n.php';
 $message = null;
 $messageType = 'error';
 
@@ -6,16 +7,16 @@ if (isset($_GET['error'])) {
     $messageType = 'error';
     switch ($_GET['error']) {
         case 'credentials':
-            $message = 'E-mail ou senha incorretos. Tente novamente.';
+            $message = $lang['error_incorrect_access'];
             break;
         case 'invalid_token':
-            $message = 'O link de redefinição é inválido ou já foi usado.';
+            $message = $lang['error_invalid_token'];
             break;
         case 'inactive_account':
-            $message = 'Esta conta está inativa. Contate o suporte.';
+            $message = $lang['error_account_inactive'];
             break;
         default:
-            $message = 'Ocorreu um erro desconhecido.';
+            $message = $lang['unknown_error'];
     }
 } elseif (isset($_GET['status'])) {
     $messageType = 'success';
@@ -31,7 +32,7 @@ if (isset($_GET['error'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="<?php echo $_SESSION['idioma']; ?>">
 
 <head>
     <meta charset="UTF-8">
@@ -101,8 +102,8 @@ if (isset($_GET['error'])) {
             <div class="absolute inset-0 bg-black/60"></div>
             <div class="relative z-10 text-center px-12 animate-fadeInUp">
                 <img src="<?php echo BASE_URL; ?>/assets/img/kolae_branca.png" alt="Logo Kolae" class="h-16 mx-auto mb-6 drop-shadow-lg">
-                <h1 class="text-4xl font-bold leading-tight drop-shadow-md">Sua jornada esportiva começa aqui.</h1>
-                <p class="mt-4 text-lg text-gray-200 drop-shadow-md">Conecte-se, treine e evolua com a maior comunidade de atletas.</p>
+                <h1 class="text-4xl font-bold leading-tight drop-shadow-md"><?php echo $lang['login_title_jorney']; ?></h1>
+                <p class="mt-4 text-lg text-gray-200 drop-shadow-md"> <?php echo $lang['login_subtitle_jorney']; ?> </p>
             </div>
         </div>
 
@@ -120,8 +121,8 @@ if (isset($_GET['error'])) {
                     <img src="<?php echo BASE_URL; ?>/assets/img/kolae_branca.png" alt="Logo Kolae" class="h-12 mx-auto drop-shadow-lg">
                 </a>
 
-                <h2 class="text-3xl font-bold text-center mb-2">Bem-vindo de volta!</h2>
-                <p class="text-gray-400 text-center mb-8">Acesse sua conta para continuar.</p>
+                <h2 class="text-3xl font-bold text-center mb-2"><?php echo $lang['login_title_welcome']; ?></h2>
+                <p class="text-gray-400 text-center mb-8"><?php echo $lang['login_subtitle_welcome']; ?></p>
 
                 <?php if ($message): ?>
                     <?php
@@ -136,24 +137,24 @@ if (isset($_GET['error'])) {
 
                 <form id="login-form" action="<?php echo BASE_URL; ?>/login/authenticate" method="POST" class="space-y-6">
                     <div>
-                        <label for="email" class="block text-sm font-medium text-gray-300 ml-1">Email</label>
+                        <label for="email" class="block text-sm font-medium text-gray-300 ml-1"><?php echo $lang['global_email']; ?></label>
                         <div class="mt-1 relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <i class="fas fa-envelope text-gray-500"></i>
                             </div>
                             <input id="email" name="email" type="email" autocomplete="email" required
-                                class="w-full bg-gray-900/50 border border-gray-600 rounded-lg pl-10 pr-4 py-3 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all" placeholder="Digite seu e-mail">
+                                class="w-full bg-gray-900/50 border border-gray-600 rounded-lg pl-10 pr-4 py-3 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all" placeholder="<?php echo $lang['login_email_ph']; ?>">
                         </div>
                     </div>
 
                     <div>
-                        <label for="password" class="block text-sm font-medium text-gray-300 ml-1">Senha</label>
+                        <label for="password" class="block text-sm font-medium text-gray-300 ml-1"><?php echo $lang['global_senha']; ?></label>
                         <div class="mt-1 relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <i class="fas fa-lock text-gray-500"></i>
                             </div>
                             <input id="password" name="password" type="password" autocomplete="current-password" required
-                                class="w-full bg-gray-900/50 border border-gray-600 rounded-lg pl-10 pr-4 py-3 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all" placeholder="Digite sua senha">
+                                class="w-full bg-gray-900/50 border border-gray-600 rounded-lg pl-10 pr-4 py-3 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all" placeholder="<?php echo $lang['login_senha_ph']; ?>">
                         </div>
                     </div>
 
@@ -164,24 +165,24 @@ if (isset($_GET['error'])) {
                                 <span class="flex items-center justify-center w-5 h-5 bg-gray-800 border-2 border-gray-600 rounded mr-2 transition-all peer-checked:bg-cyan-500 peer-checked:border-cyan-500 group-hover:border-gray-500">
                                     <i class="fas fa-check text-xs text-black opacity-0 transition-opacity peer-checked:opacity-100"></i>
                                 </span>
-                                <span class="block text-sm text-gray-300 select-none">Lembrar de mim</span>
+                                <span class="block text-sm text-gray-300 select-none"><?php echo $lang['login_remember']; ?></span>
                             </label>
                         </div>
                         <div class="text-sm">
-                            <a href="<?php echo BASE_URL; ?>/forgot-password" class="font-medium text-cyan-400 hover:text-cyan-300 transition-colors">Esqueceu a senha?</a>
+                            <a href="<?php echo BASE_URL; ?>/forgot-password" class="font-medium text-cyan-400 hover:text-cyan-300 transition-colors"><?php echo $lang['login_forget']; ?></a>
                         </div>
                     </div>
 
                     <div>
                         <button id="login-button" type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-lg text-sm font-bold text-black bg-cyan-400 hover:bg-cyan-300 hover:shadow-cyan-400/20 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-cyan-400 transition-all duration-200 transform">
-                            Entrar
+                            <?php echo $lang['login_btn_entry']; ?>
                         </button>
                     </div>
                 </form>
 
                 <p class="mt-8 text-center text-sm text-gray-400">
-                    Não tem uma conta?
-                    <a href="<?php echo BASE_URL; ?>/register" class="font-medium text-cyan-400 hover:text-cyan-300 transition-colors hover:underline">Cadastre-se</a>
+                    <?php echo $lang['login_text_register']; ?>
+                    <a href="<?php echo BASE_URL; ?>/register" class="font-medium text-cyan-400 hover:text-cyan-300 transition-colors hover:underline"></a>
                 </p>
             </div>
         </div>

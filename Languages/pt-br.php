@@ -11,8 +11,14 @@ return[
     'global_home_panel' => 'Meu Painel',
     'global_menu_profile' => 'Perfil',
     'global_menu_exit' => 'Sair',
-    'global_menu_register' => 'Cadastrar',
+    'global_menu_register' => 'Cadastre-se',
     'global_menu_login' => 'Entrar',
+
+
+
+    //global Forms
+    'global_email' => 'Email',
+    'global_senha' => 'Senha',
     //Home
 
     'perfil' => 'perfil',
@@ -26,9 +32,33 @@ return[
     'home_title_supporters' => 'Parceiros que fortalecem o esporte',
     'home_text_supporters' => 'Conheça as marcas que apoiam o crescimento do esporte e da nossa comunidade.',
     //home footer
+
     'home_footer_phrase' => 'Conectando atletas, fortalecendo o esporte.',
     'home_footer_activity' => 'Receba nossas novidades',
     'home_footer_register' => 'Cadastre-se para ficar por dentro dos próximos eventos e atualizações.',
+    //FIM HOME**********
 
+    //Login
+    'login_title_jorney' => 'Sua jornada começa aqui!',
+    'login_subtitle_jorney' => 'Conecte-se, treine e evolua com a maior comunidade de atletas.',
+
+    'login_title_welcome' => 'Bem-vindo de volta',
+    'login_subtitle_welcome' => 'Acesse sua conta para continuar',
+
+    //Forms do login (Placeholder)
+    'login_email_ph' => 'Email',
+    'login_senha_ph' => 'Senha',
+    'login_remember' => 'Lembrar de mim',
+    'login_forget' => 'Esqueceu a senha?',
+    'login_btn_entry' => 'Entrar',
+
+    //Login botao de cadastrar
+    'login_text_register' => 'Não tem uma conta?',
+
+    //ERROS
+    'error_incorrect_access' => 'E-mail ou senha incorretos. Tente novamente.',
+    'error_invalid_token' => 'O link de redefinição é inválido ou já foi usado.',
+    'error_account_inactive' => 'Esta conta está inativa. Contate o suporte.',
+    'unknown_error' => 'Ocorreu um erro desconhecido.'
 
 ];

@@ -13,6 +13,12 @@ return[
     'global_menu_exit' => 'Salir',
     'global_menu_register' => 'Regístrate',
     'global_menu_login' => 'Entrar',
+
+    //global Forms
+    'global_email' => 'Correo electrónico',
+    'global_senha' => 'Contraseña',
+
+
     //Home
     'home_connect_message' => 'Conecta con otros que comparten tu pasión por el deporte.',
     'home_search_message' => 'Encuentra atletas con los mismos intereses, nivel de habilidad y en tu área. Más que una conexión, es tu nuevo equipo.',
@@ -27,4 +33,29 @@ return[
     'home_footer_phrase' => 'Conectando atletas, fortaleciendo el deporte.',
     'home_footer_activity' => 'Recibe nuestras últimas noticias',
     'home_footer_register' => 'Regístrate para mantenerte informado sobre próximos eventos y actualizaciones.',
+
+        // Login
+    'login_title_jorney' => '¡Tu viaje comienza aquí!',
+    'login_subtitle_jorney' => 'Conéctate, entrena y evoluciona con la mayor comunidad de atletas.',
+    
+    'login_title_welcome' => 'Bienvenido de nuevo',
+    'login_subtitle_welcome' => 'Accede a tu cuenta para continuar',
+
+    // Forms do login (Placeholder)
+    'login_email_ph' => 'Correo electrónico',
+    'login_senha_ph' => 'Contraseña',
+    'login_remember' => 'Recordarme',
+    'login_forget' => '¿Olvidaste la contraseña?',
+    'login_btn_entry' => 'Entrar',
+
+    // Login botao de cadastrar
+    'login_text_register' => '¿No tienes una cuenta?',
+
+    //ERROS
+    'error_incorrect_access' => 'Correo electrónico o contraseña incorrectos. Inténtalo de nuevo.',
+    'error_invalid_token' => 'El enlace de restablecimiento es inválido o ya ha sido utilizado.',
+    'error_account_inactive' => 'Esta cuenta está inactiva. Contacta con soporte.',
+    'unknown_error' => 'Ocurrió un error desconocido.',
+
+    
 ];

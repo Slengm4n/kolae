@@ -13,6 +13,10 @@ return[
     'global_menu_exit' => 'Exit',
     'global_menu_register' => 'Sig up',
     'global_menu_login' => 'Sig in',
+
+    //global Forms
+    'global_email' => 'Email',
+    'global_senha' => 'Password',
     
     //Home
 
@@ -30,5 +34,29 @@ return[
 
     'home_footer_activity' => 'Get our latest news',
     'home_footer_register' => 'Sign up to stay informed about upcoming events and updates.',
+
+        // Login
+    'login_title_jorney' => 'Your journey starts here!',
+    'login_subtitle_jorney' => 'Connect, train, and evolve with the largest community of athletes.',
+    
+    'login_title_welcome' => 'Welcome back',
+    'login_subtitle_welcome' => 'Access your account to continue',
+
+    // Forms do login (Placeholder)
+    'login_email_ph' => 'Email',
+    'login_senha_ph' => 'Password',
+    'login_remember' => 'Remember me',
+    'login_forget' => 'Forgot password?',
+    'login_btn_entry' => 'Sign In',
+
+    // Login botao de cadastrar
+    'login_text_register' => 'Don\'t have an account?',
+
+    //ERROS
+    'error_incorrect_access' => 'Incorrect email or password. Please try again.',
+    'error_invalid_token' => 'The reset link is invalid or has already been used.',
+    'error_account_inactive' => 'This account is inactive. Please contact support.',
+    'unknown_error' => 'An unknown error occurred.',
+
 
 ];

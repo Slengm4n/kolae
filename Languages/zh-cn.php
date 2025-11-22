@@ -13,6 +13,11 @@ return[
     'global_menu_exit' => '退出',
     'global_menu_register' => '登录',
     'global_menu_login' => '进入',
+
+    //global Forms
+    'global_email' => '电子邮件',
+    'global_senha' => '密码',
+
     //Home
     'home_connect_message' => '与其他分享你对运动热情的人联系。',
     'home_search_message' => '找到兴趣、技能水平相同且在你所在地区的运动员。这不仅仅是联系，更是你的新团队。',
@@ -27,4 +32,27 @@ return[
     'home_footer_phrase' => '连接运动员，强健体育。',
     'home_footer_activity' => '获取我们的最新消息',
     'home_footer_register' => '注册以随时了解即将发生的活动和更新。',
+
+    // Login
+    'login_title_jorney' => '您的旅程从这里开始！',
+    'login_subtitle_jorney' => '与最大的运动员社区联系、训练和进步。',
+    
+    'login_title_welcome' => '欢迎回来',
+    'login_subtitle_welcome' => '登录您的账户以继续',
+
+    // Forms do login (Placeholder)
+    'login_email_ph' => '电子邮件',
+    'login_senha_ph' => '密码',
+    'login_remember' => '记住我',
+    'login_forget' => '忘记密码？',
+    'login_btn_entry' => '登录',
+
+    // Login botao de cadastrar
+    'login_text_register' => '还没有账户？',
+
+    //ERROS
+    'error_incorrect_access' => '电子邮件或密码不正确。请再试一次。',
+    'error_invalid_token' => '重置链接无效或已被使用。',
+    'error_account_inactive' => '此账户处于非活动状态。请联系支持。',
+    'unknown_error' => '发生未知错误。',
 ];
