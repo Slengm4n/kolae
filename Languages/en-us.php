@@ -12,6 +12,7 @@ return[
     'global_menu_profile' => 'Profile',
     'global_menu_exit' => 'Exit',
     'global_menu_register' => 'Sig in',
+    
     //Home
 
     'home_connect_message' => 'Connect with others who share your passion for sports.',

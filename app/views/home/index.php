@@ -193,8 +193,8 @@ require_once __DIR__ . '/../../../Includes/i18n.php';
                                 <li><a href="<?php echo BASE_URL; ?>/logout" class="flex items-center gap-4 px-5 py-3 text-sm text-red-400 hover:bg-gray-800 transition-colors"><i class="fas fa-sign-out-alt w-5 text-center"></i><?php echo $lang['global_menu_exit'];?> </a></li>
 
                             <?php else: ?>
-                                <li><a href="<?php echo BASE_URL; ?>/login" class="flex items-center gap-4 px-5 py-3 text-sm hover:bg-gray-800 transition-colors"><i class="fas fa-sign-in-alt w-5 text-center text-gray-400"></i> <?php echo $lang['global_title_panelabout'];?></a></li>
-                                <li><a href="<?php echo BASE_URL; ?>/register" class="flex items-center gap-4 px-5 py-3 text-sm font-bold text-cyan-400 hover:bg-gray-800 transition-colors"><i class="fas fa-user-plus w-5 text-center"></i><?php $lang['global_menu_register'];?></a></li>
+                                <li><a href="<?php echo BASE_URL; ?>/login" class="flex items-center gap-4 px-5 py-3 text-sm hover:bg-gray-800 transition-colors"><i class="fas fa-sign-in-alt w-5 text-center text-gray-400"></i><?php echo $lang['global_menu_login'];?></a></li>
+                                <li><a href="<?php echo BASE_URL; ?>/register" class="flex items-center gap-4 px-5 py-3 text-sm font-bold text-cyan-400 hover:bg-gray-800 transition-colors"><i class="fas fa-user-plus w-5 text-center"></i><?php echo $lang['global_menu_register'];?></a></li>
                             <?php endif; ?>
 
                         </ul>

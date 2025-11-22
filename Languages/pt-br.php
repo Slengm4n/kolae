@@ -11,6 +11,8 @@ return[
     'global_home_panel' => 'Meu Painel',
     'global_menu_profile' => 'Perfil',
     'global_menu_exit' => 'Sair',
+    'global_menu_register' => 'Cadastrar',
+    'global_menu_login' => 'Entrar',
     //Home
 
     'perfil' => 'perfil',
