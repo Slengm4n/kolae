@@ -193,7 +193,7 @@ $showCnpjModal = $data['showCnpjModal'] ?? false;
                                     onerror="this.onerror=null; this.src='<?php echo $placeholder; ?>';">
                                 <div class="absolute inset-0 bg-gradient-to-t from-[#161B22] via-transparent to-transparent opacity-60"></div>
                                 <div class="absolute top-3 right-3 bg-black/60 backdrop-blur-sm px-2 py-1 rounded-lg text-xs font-bold text-white border border-white/10">
-                                    <i class="fas fa-pencil-alt mr-1"></i> Editar
+                                    <i class="fas fa-pencil-alt mr-1"></i> <?php echo $lang['dashboard_user_venue_edit']?>
                                 </div>
                             </div>
                             <div class="p-5">
@@ -210,10 +210,10 @@ $showCnpjModal = $data['showCnpjModal'] ?? false;
                         <div class="w-20 h-20 bg-gray-800 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                             <i class="fas fa-store-slash text-4xl text-gray-500 group-hover:text-cyan-400 transition-colors"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-white">Nenhum local cadastrado</h3>
-                        <p class="text-gray-400 mt-2 mb-6 max-w-sm">Você ainda não tem quadras ou espaços esportivos registrados.</p>
+                        <h3 class="text-xl font-bold text-white"><?php echo $lang['dashboard_venue_register_title']?></h3>
+                        <p class="text-gray-400 mt-2 mb-6 max-w-sm"><?php echo $lang['dashboard_venue_register_subtitle']?></p>
                         <a href="<?php echo BASE_URL; ?>/dashboard/quadras/criar" class="bg-cyan-500 hover:bg-cyan-400 text-black font-bold py-3 px-8 rounded-xl shadow-lg hover:shadow-cyan-500/20 transition-all hover:-translate-y-0.5">
-                            <i class="fas fa-plus mr-2"></i> Cadastrar Primeiro Local
+                            <i class="fas fa-plus mr-2"></i> <?php echo $lang['dashboard_venue_register_btn']?>   
                         </a>
                     </div>
                 <?php endif; ?>

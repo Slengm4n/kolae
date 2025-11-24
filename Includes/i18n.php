@@ -13,6 +13,10 @@ if (isset($_GET['lang'])){
         $_SESSION['idioma'] = 'zh-cn';
     } elseif($_GET['lang'] == 'es-es'){
         $_SESSION['idioma'] = 'es-es';
+    } elseif($_GET['lang'] == 'ja-jp'){
+        $_SESSION['idioma'] ='ja-jp';
+    } elseif($_GET['lang'] == 'it-it'){
+        $_SESSION['idioma'] = 'it-it';
     }
     else{
         $_SESSION ['idioma'] = 'pt-br'; 

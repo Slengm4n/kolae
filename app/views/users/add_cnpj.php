@@ -1,5 +1,8 @@
+<?php
+require_once __DIR__ . '/../../../Includes/i18n.php';
+?>
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="<?php echo $_SESSION['idioma']; ?>">
 
 <head>
     <meta charset="UTF-8">
@@ -60,11 +63,11 @@
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 to-blue-600"></div>
 
             <h1 class="text-2xl font-bold text-white mb-2 text-center">
-                Valide seu Cadastro
+                <?php echo $lang['cnpj_page_title'] ?>
             </h1>
 
             <p class="text-gray-400 mb-8 text-sm text-center leading-relaxed">
-                Para garantir a segurança da plataforma e cadastrar suas quadras, precisamos validar seu CNPJ.
+               <?php echo $lang['cnpj_page_text'] ?>
             </p>
 
             <?php if (isset($error)): ?>
@@ -77,13 +80,13 @@
             <form action="<?php echo BASE_URL; ?>/dashboard/cnpj" method="POST" class="space-y-6">
                 <div>
                     <label for="cnpj" class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 ml-1">
-                        CNPJ da Empresa
+                         <?php echo $lang['cnpj_title_input'] ?>
                     </label>
                     <div class="relative group">
                         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                             <i class="fas fa-building text-gray-500 group-focus-within:text-cyan-400 transition-colors"></i>
                         </div>
-                        <input type="text" id="cnpj" name="cnpj" placeholder="00.000.000/0000-00" required maxlength="18"
+                        <input type="text" id="cnpj" name="cnpj" placeholder=" <?php echo $lang['cnpj_input_ph'] ?>" required maxlength="18"
                             class="w-full pl-11 pr-4 py-3.5 bg-gray-900/50 border border-gray-700 rounded-xl text-white placeholder-gray-600 
                                    focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all font-mono tracking-wide">
                     </div>
@@ -91,20 +94,20 @@
 
                 <button type="submit"
                     class="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-bold py-3.5 rounded-xl transition-all duration-200 shadow-lg hover:shadow-cyan-500/20 hover:-translate-y-0.5 flex items-center justify-center gap-2">
-                    <i class="fas fa-check"></i> Validar e Salvar
+                    <i class="fas fa-check"></i> <?php echo $lang['cnpj_btn_register'] ?>
                 </button>
             </form>
 
             <div class="mt-8 text-center">
                 <a href="<?php echo BASE_URL; ?>/dashboard"
                     class="text-sm text-gray-500 hover:text-white transition-colors inline-flex items-center gap-2">
-                    <i class="fas fa-arrow-left"></i> Voltar ao Painel
+                    <i class="fas fa-arrow-left"></i> <?php echo $lang['cnpj_btn_back'] ?>
                 </a>
             </div>
         </div>
 
         <p class="text-center text-xs text-gray-600 mt-6">
-            &copy; <?php echo date('Y'); ?> Kolae. Ambiente Seguro.
+            &copy; <?php echo date('Y'); ?> <?php echo $lang['cnpj_kolae_safe'] ?>
         </p>
     </div>
 

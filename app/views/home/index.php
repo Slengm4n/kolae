@@ -1,5 +1,4 @@
 <?php
-
 require_once __DIR__ . '/../../../Includes/i18n.php';
 ?>
 <!DOCTYPE html>
@@ -145,6 +144,18 @@ require_once __DIR__ . '/../../../Includes/i18n.php';
                             </button>
                         </li>
 
+                        <li>
+                            <button class="w-full text-left px-3 py-2 rounded hover:bg-gray-800 transition-colors" data-lang="ja-jp">
+                                日本
+                            </button>
+                        </li>
+
+                        <li>
+                            <button class="w-full text-left px-3 py-2 rounded hover:bg-gray-800 transition-colors" data-lang="it-it">
+                                Italiano
+                            </button>
+                        </li>
+
                     </ul>
                 </div>
             </div>
@@ -185,7 +196,7 @@ require_once __DIR__ . '/../../../Includes/i18n.php';
 
                             <?php if ($isLoggedIn): ?>
                                 <li>
-                                    <div class="px-5 py-2 text-xs text-gray-500 uppercase font-bold">Conta</div>
+                                    <div class="px-5 py-2 text-xs text-gray-500 uppercase font-bold"><?php echo $lang['global_account'] ?></div>
                                 </li>
                                 <li><a href="<?php echo BASE_URL; ?>/dashboard" class="flex items-center gap-4 px-5 py-3 text-sm hover:bg-gray-800 transition-colors"><i class="fas fa-columns w-5 text-center text-cyan-400"></i> <?php echo $lang['global_home_panel'];?></a></li>
                                 <li><a href="<?php echo BASE_URL; ?>/dashboard/perfil" class="flex items-center gap-4 px-5 py-3 text-sm hover:bg-gray-800 transition-colors"><i class="fas fa-user-cog w-5 text-center text-gray-400"></i><?php echo $lang['global_menu_profile'];?></a></li>
@@ -381,12 +392,12 @@ require_once __DIR__ . '/../../../Includes/i18n.php';
         });
 
 
-        // --- 2. Lógica do Modal de Idioma (UNIFICADA) ---
+
         const langBtn = document.getElementById('lang-btn');
         const langModal = document.getElementById('lang-modal');
         const langBox = document.getElementById('lang-box');
 
-        // A. Abrir o modal ao clicar no botão da bandeira
+
         if (langBtn) {
             langBtn.addEventListener('click', () => {
                 langModal.classList.remove('opacity-0', 'invisible');
@@ -394,10 +405,10 @@ require_once __DIR__ . '/../../../Includes/i18n.php';
             });
         }
 
-        // B. Fechar o modal ao clicar fora dele
+
         if (langModal && langBox) {
             langModal.addEventListener('click', (e) => {
-                // Verifica se o clique NÃO foi dentro da caixa (langBox)
+
                 if (!langBox.contains(e.target)) {
                     langModal.classList.add('opacity-0', 'invisible');
                     langBox.classList.add('opacity-0', 'scale-90');
