@@ -20,6 +20,29 @@ use App\Core\AuthHelper;
 
 
 
+// --- CONFIGURAÇÃO DE SEGURANÇA DA SESSÃO (BLINDAGEM) ---
+
+// Verifica se está rodando em HTTPS (Produção) ou HTTP (Localhost)
+// Detecta HTTPS mesmo atrás de Proxy (Load Balancer)
+$isSecure = false;
+if (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) === 'on') {
+    $isSecure = true;
+} elseif (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']) === 'https') {
+    $isSecure = true;
+} elseif (isset($_SERVER['HTTP_FRONT_END_HTTPS']) && strtolower($_SERVER['HTTP_FRONT_END_HTTPS']) === 'on') {
+    $isSecure = true;
+}
+
+$cookieParams = [
+    'lifetime' => 86400,
+    'path' => '/',
+    'domain' => $_SERVER['HTTP_HOST'],
+    'secure' => $isSecure, // Usa a detecção inteligente
+    'httponly' => true,
+    'samesite' => 'Lax'
+];
+
+session_set_cookie_params($cookieParams);
 session_start();
 
 
