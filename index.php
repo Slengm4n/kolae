@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 
 use App\Core\Router;
 use App\Controllers\HomeController;
@@ -12,6 +16,7 @@ use App\Controllers\VenueApiController;
 use App\Controllers\SportApiController;
 use App\Controllers\GameApiController;
 use App\Core\AuthHelper;
+
 
 
 

@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../../../Includes/i18n.php';
 // Recupera dados passados pelo Controller
 $user = $data['user'] ?? [];
 $userName = $_SESSION['user_name'] ?? 'Usuário';
@@ -6,7 +7,7 @@ $userAvatar = $_SESSION['user_avatar'] ?? null; // Pega da sessão atualizada
 $userId = $_SESSION['user_id'] ?? 0;
 ?>
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="<?php echo $_SESSION['idioma']; ?>">
 
 <head>
     <meta charset="UTF-8">
@@ -71,7 +72,7 @@ $userId = $_SESSION['user_id'] ?? 0;
             </a>
 
             <nav class="hidden md:flex items-center space-x-8">
-                <a href="<?php echo BASE_URL; ?>/dashboard" class="font-medium text-gray-400 hover:text-white transition-colors">Meu Painel</a>
+                <a href="<?php echo BASE_URL; ?>/dashboard" class="font-medium text-gray-400 hover:text-white transition-colors"><?php echo $lang['global_home_panel'] ?></a>
             </nav>
 
             <div class="relative">
@@ -100,9 +101,9 @@ $userId = $_SESSION['user_id'] ?? 0;
                         <p class="font-semibold text-white truncate"><?php echo htmlspecialchars($userName); ?></p>
                     </div>
                     <ul class="py-2 text-sm">
-                        <li><a href="<?php echo BASE_URL; ?>/dashboard" class="flex items-center gap-3 px-5 py-3 hover:bg-gray-800 transition-colors"><i class="fas fa-home w-4 text-center text-gray-400"></i> Voltar para Home</a></li>
+                        <li><a href="<?php echo BASE_URL; ?>/dashboard" class="flex items-center gap-3 px-5 py-3 hover:bg-gray-800 transition-colors"><i class="fas fa-home w-4 text-center text-gray-400"></i> <?php echo $lang['global_back'] ?></a></li>
                         <li class="border-t border-gray-800 my-2"></li>
-                        <li><a href="<?php echo BASE_URL; ?>/logout" class="flex items-center gap-3 px-5 py-3 text-red-400 hover:bg-red-500/10 transition-colors"><i class="fas fa-sign-out-alt w-4 text-center"></i> Sair</a></li>
+                        <li><a href="<?php echo BASE_URL; ?>/logout" class="flex items-center gap-3 px-5 py-3 text-red-400 hover:bg-red-500/10 transition-colors"><i class="fas fa-sign-out-alt w-4 text-center"></i> <?php echo $lang['global_menu_exit'] ?></a></li>
                     </ul>
                 </div>
             </div>
@@ -113,19 +114,19 @@ $userId = $_SESSION['user_id'] ?? 0;
         <div class="flex flex-col md:flex-row items-start gap-8">
 
             <aside class="w-full md:w-64 flex-shrink-0 animate-up">
-                <h1 class="text-2xl font-bold text-white mb-6 px-2">Configurações</h1>
+                <h1 class="text-2xl font-bold text-white mb-6 px-2"><?php echo $lang['global_menu_config'] ?></h1>
                 <nav class="bg-[#161B22] p-2 rounded-2xl border border-gray-800 shadow-lg">
                     <ul class="space-y-1">
                         <li>
                             <a href="#" class="flex items-center gap-3 px-4 py-3 text-sm font-semibold bg-cyan-500/10 text-cyan-400 rounded-xl border-l-4 border-cyan-400 transition-all">
                                 <i class="fas fa-user-edit w-5 text-center"></i>
-                                <span>Editar Perfil</span>
+                                <span><?php echo $lang['config_custom_profile'] ?></span>
                             </a>
                         </li>
                         <li>
                             <a href="<?php echo BASE_URL; ?>/dashboard/perfil/seguranca" class="flex items-center gap-3 px-4 py-3 text-sm font-semibold text-gray-400 hover:bg-gray-800 hover:text-white rounded-xl transition-all group">
                                 <i class="fas fa-shield-alt w-5 text-center group-hover:text-cyan-400 transition-colors"></i>
-                                <span>Segurança</span>
+                                <span><?php echo $lang['config_security'] ?></span>
                             </a>
                         </li>
                     </ul>
@@ -137,7 +138,7 @@ $userId = $_SESSION['user_id'] ?? 0;
                 <?php if (isset($_GET['status']) && $_GET['status'] === 'updated'): ?>
                     <div class="mb-6 p-4 rounded-xl bg-green-500/10 border border-green-500/20 text-green-300 flex items-center animate-up">
                         <i class="fas fa-check-circle mr-3 text-xl"></i>
-                        <span>Perfil atualizado com sucesso!</span>
+                        <span><?php echo $lang['profile_update_success'] ?></span>
                     </div>
                 <?php endif; ?>
 
@@ -146,9 +147,9 @@ $userId = $_SESSION['user_id'] ?? 0;
                         <i class="fas fa-times-circle mr-3 text-xl"></i>
                         <span>
                             <?php
-                            if ($_GET['error'] === 'avatar_upload') echo 'Erro ao fazer upload da imagem. Tente um arquivo menor (JPG/PNG).';
-                            elseif ($_GET['error'] === 'update_failed') echo 'Erro ao atualizar o perfil.';
-                            else echo 'Ocorreu um erro desconhecido.';
+                            if ($_GET['error'] === 'avatar_upload') echo $lang['profile_error_upload'];
+                            elseif ($_GET['error'] === 'update_failed') echo $lang['profile_error_update'];
+                            else echo $lang['unknown_error'];
                             ?>
                         </span>
                     </div>
@@ -181,23 +182,23 @@ $userId = $_SESSION['user_id'] ?? 0;
 
                                         <label for="avatar-upload" class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer">
                                             <i class="fas fa-camera text-2xl mb-1"></i>
-                                            <span class="text-xs font-medium">Alterar</span>
+                                            <span class="text-xs font-medium"><?php echo $lang['profile_image_ph'] ?></span>
                                         </label>
                                         <input type="file" name="avatar" id="avatar-upload" class="hidden" accept="image/png, image/jpeg, image/gif">
                                     </div>
-                                    <p class="text-xs text-gray-500 mt-3 text-center lg:text-left w-40">Clique na foto para alterar.<br>Máx 5MB.</p>
+                                    <p class="text-xs text-gray-500 mt-3 text-center lg:text-left w-40"><?php echo $lang['profile_image_desc'] ?><br>Máx 5MB.</p>
                                 </div>
 
                                 <div class="flex-1 w-full space-y-6">
                                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-gray-800 pb-4 mb-4">
                                         <div>
-                                            <h2 class="text-2xl font-bold text-white">Informações Pessoais</h2>
-                                            <p class="text-sm text-gray-400">Atualize seus dados de identificação.</p>
+                                            <h2 class="text-2xl font-bold text-white"><?php echo $lang['profile_title'] ?></h2>
+                                            <p class="text-sm text-gray-400"><?php echo $lang['profile_subtitle'] ?></p>
                                         </div>
                                     </div>
 
                                     <div>
-                                        <label for="name" class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1.5">Nome Completo</label>
+                                        <label for="name" class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1.5"><?php echo $lang['register_name'] ?></label>
                                         <div class="relative">
                                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500"><i class="fas fa-user"></i></div>
                                             <input id="name" name="name" type="text" value="<?php echo htmlspecialchars($user['name'] ?? ''); ?>" required
@@ -207,7 +208,7 @@ $userId = $_SESSION['user_id'] ?? 0;
 
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div>
-                                            <label for="email" class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1.5">Email</label>
+                                            <label for="email" class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1.5"><?php echo $lang['global_email'] ?></label>
                                             <div class="relative opacity-60 cursor-not-allowed" title="Não editável">
                                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500"><i class="fas fa-envelope"></i></div>
                                                 <input id="email" type="email" value="<?php echo htmlspecialchars($user['email'] ?? ''); ?>" disabled
@@ -216,7 +217,7 @@ $userId = $_SESSION['user_id'] ?? 0;
                                         </div>
 
                                         <div>
-                                            <label for="birthdate" class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1.5">Nascimento</label>
+                                            <label for="birthdate" class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1.5"><?php echo $lang['register_birthday'] ?></label>
                                             <div class="relative opacity-60 cursor-not-allowed" title="Não editável">
                                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500"><i class="fas fa-calendar"></i></div>
                                                 <input id="birthdate" type="date" value="<?php echo htmlspecialchars($user['birthdate'] ?? ''); ?>" disabled
@@ -229,10 +230,10 @@ $userId = $_SESSION['user_id'] ?? 0;
 
                             <div class="pt-6 border-t border-gray-800 flex justify-end items-center gap-4">
                                 <a href="<?php echo BASE_URL; ?>/dashboard" class="text-gray-400 hover:text-white text-sm font-semibold px-4 py-2 transition-colors">
-                                    Cancelar
+                                    <?php echo $lang['global_cancel'] ?>
                                 </a>
                                 <button type="submit" class="bg-cyan-500 hover:bg-cyan-400 text-black font-bold py-3 px-8 rounded-xl shadow-lg hover:shadow-cyan-500/20 transition-all transform hover:-translate-y-0.5">
-                                    Salvar Alterações
+                                    <?php echo $lang['profile_btn_save'] ?>
                                 </button>
                             </div>
 
@@ -240,7 +241,7 @@ $userId = $_SESSION['user_id'] ?? 0;
                     <?php else : ?>
                         <div class="text-center py-12">
                             <i class="fas fa-user-slash text-4xl text-gray-600 mb-4"></i>
-                            <p class="text-gray-400">Não foi possível carregar os dados do usuário.</p>
+                            <p class="text-gray-400"><?php echo $lang['profile_error_data'] ?></p>
                         </div>
                     <?php endif; ?>
                 </div>
