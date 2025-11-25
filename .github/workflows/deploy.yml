@@ -1,13 +1,11 @@
 # Nome do seu workflow
 name: Deploy to InfinityFree
 
-# Gatilho: Quando esse workflow deve rodar?
 on:
     push:
         branches:
             - main # Mude para 'master' se for o nome da sua branch principal
 
-# Tarefas que o workflow vai executar
 jobs:
     ftp-deploy:
         # O tipo de máquina que o workflow vai usar
